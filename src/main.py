@@ -1,13 +1,13 @@
 def main():
     flag = True
     while flag:
-        print("\t- 1) Load a basic text file")
-        print("\t- 2) Display basic statistics")
-        print("\t- 3) Show word frequency analysis")
-        print("\t- 4) Display sentence analysis")
-        print("\t- 5) Display character analysis")
-        print("\t- 6) Export results")
-        print("\t- 0) Exit program")
+        print("\t 1) Load a basic text file")
+        print("\t 2) Display basic statistics")
+        print("\t 3) Show word frequency analysis")
+        print("\t 4) Display sentence analysis")
+        print("\t 5) Display character analysis")
+        print("\t 6) Export results")
+        print("\t 0) Exit program")
 
         choice = input("\tInsert your choice:")
 
