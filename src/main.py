@@ -1,4 +1,4 @@
-import file_loading
+import load
 
 def main():
     flag = True
@@ -21,7 +21,7 @@ def main():
 
         match choice:
             case "1":
-                statistics["filename"] = file_loading.file_loading()
+                statistics["filename"] = load.load_file()
             case "2":
                 print("Choice two!")
             case "3":

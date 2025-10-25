@@ -1,6 +1,6 @@
 import os
 
-def file_loading():
+def load_file():
     print("\n--- File Selection ---\nAvailable text files:")
     try:
         for index, x in enumerate(os.listdir('../data/')):
@@ -17,7 +17,7 @@ def file_loading():
             # TODO: call file analysis from here, we are just returning the book right now
             return selected_file[choice - 1]
         print(f"Please enter a number between 1 and {len(selected_file)}")
-        return file_loading()
+        return load_file()
     except ValueError:
         print("Invalid input!")
-        return file_loading()
+        return load_file()
