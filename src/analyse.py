@@ -1,26 +1,50 @@
 def analyse_file(path: str, filename: str) -> dict:
     statistics = {"filename": filename,
+                  # ==== Basic statistics ====
                   'total_lines': 0,
                   "total_words": 0,
                   "total_characters_with_spaces": 0,
                   "total_characters_without_spaces": 0,
                   "avg_words_per_line": 0.0,
                   "avg_char_per_word": 0.0,
-                  "most_common_words": {}}
+                  # ==== Word analysis ====
+                  "ten_most_common_words": {},
+                  "word_length_distribution": {},
+                  "unique_word_count": 0,
+                  "words_appearing_only_once": 0,
+                  # ==== Sentence analysis ====
+                  "average_words_per_sentence": 0.0,
+                  "longest_sentence": 0,
+                  "shortest_sentence": 0,
+                  "sentence_length_distribution": 0,
+                  # ==== Character analysis ====
+                  "letter_frequency_distribution": 0,
+                  "punctuation_statistics": 0,
+                  "case_distribution": 0,
+                   }
     all_words = {}
+    word_length_lst = []
+    sentence_length_lst = []
 
     try: # TODO: Refactor!
         with open(f"{path}{filename}", "r") as file:
             temp_word = ''
+            temp_sentence = ''
             for line in file:
                 for char in line:
                     statistics['total_characters_with_spaces'] += 1
+                    temp_sentence += char
+
+                    if char == '.' or char == '!' or char == '?':
+                        sentence_length_lst.append(len(temp_sentence))
+                        temp_sentence = ''
+
                     if char.isalpha():
                         temp_word += char.lower()
                     else:
                         if temp_word != '':
                             statistics['total_words'] += 1
-                            statistics['total_characters_without_spaces'] += len(temp_word)
+                            word_length_lst.append(len(temp_word))
                             if temp_word in all_words:
                                 all_words[temp_word] += 1
                             else:
@@ -31,7 +55,8 @@ def analyse_file(path: str, filename: str) -> dict:
 
             statistics['avg_words_per_line'] = statistics['total_words'] / statistics['total_lines']
             statistics['avg_char_per_word'] = statistics['total_characters_without_spaces'] / statistics['total_words']
-            statistics['most_common_words'] = most_common_words(all_words)
+            statistics['ten_most_common_words'] = most_common_words(all_words)
+            statistics['']
 
     except FileNotFoundError:
         print("File not found.")

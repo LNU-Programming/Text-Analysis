@@ -15,6 +15,7 @@ def load_file() -> dict:
 
     try:
         choice = int(input("Enter a number from the list above. "))
+        # TODO: add possibility to type filename aswell
         selected_files = os.listdir('../data/')
         if 0 < choice <= len(selected_files):
             return analyse.analyse_file(path, selected_files[choice - 1])

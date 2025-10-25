@@ -1,4 +1,4 @@
-def display_basic_statistics(statistics: dict) -> None:
+def basic_statistics(statistics: dict) -> None:
     print(f'--- Basic Statistics for "{statistics["filename"]}" ---')
     print(f'Lines: {statistics["total_lines"]}')
     print(f'Words: {statistics["total_words"]}')
@@ -12,7 +12,7 @@ def display_basic_statistics(statistics: dict) -> None:
     print("Press ENTER to continue...")
     return None
 
-def display_word_analysis(statistics) -> None:
+def word_analysis(statistics) -> None:
     print(f'--- Word Analysis for "{statistics["filename"]}" ---')
     print("Top 10 most common words:")
     for i, word in enumerate(statistics["most_common_words"]):
@@ -27,4 +27,16 @@ def display_word_analysis(statistics) -> None:
     print("\nGenerating word analysis visualization...")
     # TODO: generate Matplotlib visualization
     print("Press ENTER to continue...")
+    return None
+
+def sentence_analysis(statistics) -> None:
+    print(f'--- Sentence Analysis for "{statistics["filename"]}" ---')
+    print(f"Total sentences: 0")
+    print(f"Average words per sentence: 0")
+    print(f"Shortest sentence: 0")
+    print(f"Longest sentence: 0")
+
+    print(f"Shortest sentence text: a")
+    print(f"Longest sentence text: a")
+
     return None

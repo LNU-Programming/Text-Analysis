@@ -23,9 +23,9 @@ def main():
             case "1":
                 statistics = load.load_file()
             case "2":
-                display.display_basic_statistics(statistics)
+                display.basic_statistics(statistics)
             case "3":
-                display.display_word_analysis(statistics)
+                display.word_analysis(statistics)
             case "4":
                 print("Choice four!")
             case "5":
