@@ -1,4 +1,5 @@
-import load
+import load, time
+
 
 def main():
     flag = True
@@ -21,7 +22,7 @@ def main():
 
         match choice:
             case "1":
-                statistics["filename"] = load.load_file()
+                statistics = load.load_file()
             case "2":
                 print("Choice two!")
             case "3":
@@ -35,6 +36,10 @@ def main():
             case "0":
                 print("Exiting the program...")
                 flag = False
+            case _:
+                print("\n\tInvalid choice! Please select a number between 0 and 6.")
+                time.sleep(3)
+                # TODO: Add a punishment when the user enters an invalid choices multiple times.
 
 # ----------------------------------------------------------------------------------------------------------------------
 

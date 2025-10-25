@@ -1,6 +1,7 @@
 import os
+import analyse
 
-def load_file():
+def load_file() -> dict:
     print("\n--- File Selection ---\nAvailable text files:")
     try:
         for index, x in enumerate(os.listdir('../data/')):
@@ -12,11 +13,10 @@ def load_file():
 
     try:
         choice = int(input("Enter a number from the list above. "))
-        selected_file = os.listdir('../data/')
-        if 0 < choice <= len(selected_file):
-            # TODO: call file analysis from here, we are just returning the book right now
-            return selected_file[choice - 1]
-        print(f"Please enter a number between 1 and {len(selected_file)}")
+        selected_files = os.listdir('../data/')
+        if 0 < choice <= len(selected_files):
+            return analyse.analyse_file(selected_files[choice - 1])
+        print(f"Please enter a number between 1 and {len(selected_files)}")
         return load_file()
     except ValueError:
         print("Invalid input!")
