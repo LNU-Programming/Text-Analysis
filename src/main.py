@@ -9,7 +9,7 @@ def main():
         print("\t 6) Export results")
         print("\t 0) Exit program")
 
-        choice = input("\tInsert your choice:")
+        choice = input("\tInsert your choice: ")
 
         match choice:
             case "1":
