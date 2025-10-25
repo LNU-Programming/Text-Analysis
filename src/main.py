@@ -23,6 +23,7 @@ def main():
         match choice:
             case "1":
                 statistics = load.load_file()
+                print(statistics['counter'])
             case "2":
                 print("Choice two!")
             case "3":
@@ -39,7 +40,8 @@ def main():
             case _:
                 print("\n\tInvalid choice! Please select a number between 0 and 6.")
                 time.sleep(3)
-                # TODO: Add a punishment when the user enters an invalid choices multiple times.
+                # TODO: Add a punishment when the user enters an invalid choices multiple times. Depending how many char
+                #  the user inputs.
 
 # ----------------------------------------------------------------------------------------------------------------------
 
