@@ -4,6 +4,9 @@ def main():
     flag = True
     statistics = {"filename": ""} # dictionary containing statistics for the whole book, after we selected it
     while flag:
+        print("\n=====================================")
+        print("\t\tTEXT ANALYZER")
+        print("=====================================")
         print("\t 1) Load a basic text file")
         print("\t 2) Display basic statistics")
         print("\t 3) Show word frequency analysis")
@@ -11,9 +14,10 @@ def main():
         print("\t 5) Display character analysis")
         print("\t 6) Export results")
         print("\t 0) Exit program")
-        print(f"\t\n The file you selected is: {statistics["filename"]}")
+        print("=====================================")
+        print(f"\t{ ("Current file: " + statistics["filename"]) if statistics["filename"] != "" else "No file loaded"}")
 
-        choice = input("\tInsert your choice: ")
+        choice = input("\n\tInsert your choice (0 - 6): ")
 
         match choice:
             case "1":
