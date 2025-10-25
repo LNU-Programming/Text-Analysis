@@ -2,9 +2,6 @@ import os
 
 def file_loading():
     print("\n--- File Selection ---\nAvailable text files:")
-    # TODO: If no files ar present, return nothing
-    # TODO: Add try catch when reading a file, since it might raise an exception and we don't want that
-
     try:
         for index, x in enumerate(os.listdir('../data/')):
             if x.endswith(".txt"):
