@@ -8,13 +8,14 @@ def file_loading():
         if x.endswith(".txt"):
             print(f'{index+1}) {x}')
 
-    while True: # TODO: not allowed, rewrite it without while True
-        try:
-            choice = int(input("Enter a number from the list above. "))
-            selected_file = os.listdir('../data/')
-            if 0 < choice < len(selected_file):
-                # TODO: call file analysis from here, we are just returning the book right now
-                return selected_file[choice - 1]
-            print(f"Please enter a number between 1 and {len(selected_file)}")
-        except ValueError:
-            print("Invalid input!")
+    try:
+        choice = int(input("Enter a number from the list above. "))
+        selected_file = os.listdir('../data/')
+        if 0 < choice <= len(selected_file):
+            # TODO: call file analysis from here, we are just returning the book right now
+            return selected_file[choice - 1]
+        print(f"Please enter a number between 1 and {len(selected_file)}")
+        return file_loading()
+    except ValueError:
+        print("Invalid input!")
+        return file_loading()
