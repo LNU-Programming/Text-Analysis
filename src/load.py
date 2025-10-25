@@ -1,6 +1,7 @@
 import os
 import analyse
 
+
 def load_file() -> dict:
     path = "../data/"
     print("\n--- File Selection ---\nAvailable text files:")

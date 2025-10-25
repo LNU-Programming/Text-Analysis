@@ -1,5 +1,14 @@
 import load, time
 
+def display_basic_statistics(statistics: dict) -> None:
+    print(f'--- Basic Statistics for "{statistics["filename"]}" ---')
+    print(f'Lines: {statistics["total_lines"]}')
+    print(f'Words: {statistics["total_words"]}')
+    print(f'Characters (with spaces): {statistics["total_characters_with_spaces"]}')
+    print(f'Characters (without spaces): {statistics["total_characters_without_spaces"]}')
+    print(f'Average words per line: {statistics["avg_words_per_line"]}')
+    print(f'Average word length: {statistics["avg_char_per_word"]}')
+    return None
 
 def main():
     flag = True
@@ -23,9 +32,8 @@ def main():
         match choice:
             case "1":
                 statistics = load.load_file()
-                print(statistics['counter'])
             case "2":
-                print("Choice two!")
+                display_basic_statistics(statistics)
             case "3":
                 print("Choice three!")
             case "4":
