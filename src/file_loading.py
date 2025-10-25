@@ -10,14 +10,14 @@ def file_loading():
             # Prints only text file present in My Folder
             print(f'{index+1}) {x}')
 
-    # TODO: Input checking properly
-    flag = True
-    choice = 0
     while True:
-        choice = int(input("Enter a number from the list above. "))
-        selected_file = os.listdir('../data/')
-        if 0 < choice < len(selected_file):
-            # TODO: call file analysis
-            return selected_file[choice-1]
-        else:
-            print("Please choose an appropriate number.")
+        try:
+            choice = int(input("Enter a number from the list above. "))
+            selected_file = os.listdir('../data/')
+            if 0 < choice < len(selected_file):
+                # TODO: call file analysis
+                return selected_file[choice - 1]
+            else:
+                print(f"Please enter a number between 1 and {len(selected_file)}")
+        except ValueError:
+            print("Invalid input!")
