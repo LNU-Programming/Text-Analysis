@@ -15,8 +15,8 @@ def display_basic_statistics(statistics: dict) -> None:
 def display_word_analysis(statistics) -> None:
     print(f'--- Word Analysis for "{statistics["filename"]}" ---')
     print("Top 10 most common words:")
-    for word in statistics["most_common_words"]:
-        print(f"{word:<6}{statistics["most_common_words"][word]} times ({ statistics['most_common_words'][word] / statistics['total_words'] * 100 :.2f} %)")
+    for i, word in enumerate(statistics["most_common_words"]):
+        print(f"{i+1}. {word:<6}{statistics["most_common_words"][word]} times ({ statistics['most_common_words'][word] / statistics['total_words'] * 100 :.2f} %)")
 
     print("\nWord length statistics:")
     print(f"\tShortest word: 0 characters")
