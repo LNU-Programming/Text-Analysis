@@ -4,9 +4,14 @@ def file_loading():
     print("\n--- File Selection ---\nAvailable text files:")
     # TODO: If no files ar present, return nothing
     # TODO: Add try catch when reading a file, since it might raise an exception and we don't want that
-    for index, x in enumerate(os.listdir('../data/')):
-        if x.endswith(".txt"):
-            print(f'{index+1}) {x}')
+
+    try:
+        for index, x in enumerate(os.listdir('../data/')):
+            if x.endswith(".txt"):
+                print(f'{index+1}) {x}')
+    except FileNotFoundError:
+        print("File or directory not found.")
+        return None
 
     try:
         choice = int(input("Enter a number from the list above. "))

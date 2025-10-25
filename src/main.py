@@ -17,7 +17,7 @@ def main():
         print("=====================================")
         print(f"\t{ ("Current file: " + statistics["filename"]) if statistics["filename"] != "" else "No file loaded"}")
 
-        choice = input("\n\tInsert your choice (0 - 6): ")
+        choice = input("\n\tInsert your choice (0 - 6): ") # TODO: handle user input, also None case
 
         match choice:
             case "1":
