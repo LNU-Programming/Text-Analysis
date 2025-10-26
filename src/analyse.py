@@ -3,14 +3,14 @@ def analyse_file(path: str, filename: str) -> dict[str, any]:
         "filename": filename,
         # ==== Basic statistics ====
         "total_lines": 0,
-        "total_paragraphs": 0,
-        "total_sentences": 0,
+        "total_paragraphs": 0,  # TODO
+        "total_sentences": 0,  # TODO
         "total_words": 0,
         "total_characters_with_spaces": 0,
-        "total_characters_without_spaces": 0,
+        "total_characters_without_spaces": 0,  # TODO
         "avg_words_per_line": 0.0,
-        "avg_words_per_sentence": 0.0,
-        "avg_char_per_word": 0.0,
+        "avg_words_per_sentence": 0.0,  # TODO
+        "avg_char_per_word": 0.0,  # TODO
         # ==== Word analysis ====
         "ten_most_common_words": {},
         "shortest_word": "",
