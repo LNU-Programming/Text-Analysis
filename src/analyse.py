@@ -1,5 +1,5 @@
 SENTENCE_ENDERS = {".", "!", "?"}
-WORD_BOUNDARIES = {" ", "\t", "\n", ",", ";", ":", "-", "(", ")", "[", "]"}
+WORD_BOUNDARIES = {" ", "\t", "\n", ",", ";", ":"}
 TOP_WORDS_COUNT = 10
 
 
@@ -85,6 +85,7 @@ def process_character(char: str, statistics: dict, analysis_data: dict) -> None:
     if char in SENTENCE_ENDERS:
         analysis_data["sentence_lengths"].append(len(analysis_data["current_sentence"]))
         analysis_data["current_sentence"] = ""
+        statistics["total_sentences"] += 1
 
     # Check if we are at the end of a word
     if char.isalpha():
@@ -115,6 +116,7 @@ def finalize_remaining_data(statistics: dict, analysis_data: dict) -> None:
     # Finalize current sentence if it exists, it might not be ending with punctuation
     if analysis_data["current_sentence"]:
         analysis_data["sentence_lengths"].append(len(analysis_data["current_sentence"]))
+        statistics["total_sentences"] += 1
 
 
 def calculate_final_statistics(statistics: dict, analysis_data: dict) -> None:
