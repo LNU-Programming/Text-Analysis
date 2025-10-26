@@ -1,3 +1,8 @@
+# Configuration constants
+SENTENCE_ENDERS = {'.', '!', '?'}
+WORD_BOUNDARIES = {' ', '\t', '\n', ',', ';', ':', '-', '(', ')', '[', ']'}
+TOP_WORDS_COUNT = 10
+
 def analyse_file(path: str, filename: str) -> dict[str, any]:
     statistics = initialize_statistics(filename)
     analysis_data = initialize_analysis_data()
@@ -84,7 +89,7 @@ def process_character(char: str, statistics: dict, analysis_data: dict) -> None:
     analysis_data["current_sentence"] += char
 
     # Check for sentence end
-    if char in ".!?":
+    if char in SENTENCE_ENDERS:
         analysis_data["sentence_lengths"].append(len(analysis_data["current_sentence"]))
         analysis_data["current_sentence"] = ""
 
@@ -138,10 +143,12 @@ def calculate_final_statistics(statistics: dict, analysis_data: dict) -> None:
 
 
 def most_common_words(all_words: dict) -> dict:
-    top_ten_words = {}
-    for _ in range(10):
+    top_words = {}
+    for _ in range(TOP_WORDS_COUNT):
+        if not all_words:
+            break
         max_val = max(all_words, key=all_words.get)
-        top_ten_words[max_val] = all_words[max_val]
+        top_words[max_val] = all_words[max_val]
         all_words.pop(max_val)
 
-    return top_ten_words
+    return top_words
