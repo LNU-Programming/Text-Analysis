@@ -78,7 +78,7 @@ def analyse_file(path: str, filename: str) -> dict[str, any]:
         print("File not found.")
 
     print(f"Analysis complete! Processed {statistics['total_lines']} lines.")
-    print(f'Successfully loaded and analyzed "{statistics['filename']}"')
+    print(f'Successfully loaded and analyzed "{statistics["filename"]}"')
     return statistics
 
 

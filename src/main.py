@@ -1,3 +1,4 @@
+from string import printable
 import load
 import time
 import display
