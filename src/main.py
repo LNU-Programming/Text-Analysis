@@ -1,8 +1,14 @@
-import load, time, display
+import load
+import time
+import display
+
 
 def main():
     flag = True
-    statistics = {"filename": ""} # dictionary containing statistics for the whole book, after we selected it
+    statistics = {
+        "filename": ""
+    }  # dictionary containing statistics for the whole book, after we selected it
+
     while flag:
         print("\n=====================================")
         print("\t\tTEXT ANALYZER")
@@ -15,10 +21,16 @@ def main():
         print("\t 6) Export results")
         print("\t 0) Exit program")
         print("=====================================")
-        print(f"\t{ ("Current file: " + statistics["filename"]) if statistics["filename"] != "" else "No file loaded"}")
+        print(
+            f"\t{('Current file: ' + statistics['filename']) if statistics['filename'] != '' else 'No file loaded'}"
+        )
 
-        choice = input("\n\tInsert your choice (0 - 6): ") # TODO: handle user input, also None case
+        choice = input(
+            "\n\tInsert your choice (0 - 6): "
+        )  # TODO: handle user input, also None case
 
+        # TODO: If the book is not loaded yet, there is no point in accessing any
+        # menu other than the 1st one.
         match choice:
             case "1":
                 statistics = load.load_file()
@@ -40,6 +52,7 @@ def main():
                 time.sleep(3)
                 # TODO: Add a punishment when the user enters an invalid choices multiple times. Depending how many char
                 #  the user inputs.
+
 
 # ----------------------------------------------------------------------------------------------------------------------
 
