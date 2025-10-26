@@ -28,7 +28,7 @@ def initialize_statistics(filename: str) -> dict[str, any]:
         # ==== Basic statistics ====
         "total_lines": 0,
         "total_paragraphs": 0,  # TODO
-        "total_sentences": 0,  # TODO
+        "total_sentences": 0,
         "total_words": 0,
         "total_characters_with_spaces": 0,
         "total_characters_without_spaces": 0,  # TODO
