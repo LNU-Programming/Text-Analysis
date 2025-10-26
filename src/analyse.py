@@ -1,7 +1,7 @@
-# Configuration constants
-SENTENCE_ENDERS = {'.', '!', '?'}
-WORD_BOUNDARIES = {' ', '\t', '\n', ',', ';', ':', '-', '(', ')', '[', ']'}
+SENTENCE_ENDERS = {".", "!", "?"}
+WORD_BOUNDARIES = {" ", "\t", "\n", ",", ";", ":", "-", "(", ")", "[", "]"}
 TOP_WORDS_COUNT = 10
+
 
 def analyse_file(path: str, filename: str) -> dict[str, any]:
     statistics = initialize_statistics(filename)
@@ -12,10 +12,8 @@ def analyse_file(path: str, filename: str) -> dict[str, any]:
             for line in file:
                 process_line(line, statistics, analysis_data)
 
-        # Finalize any remaining words or sentences
         finalize_remaining_data(statistics, analysis_data)
         calculate_final_statistics(statistics, analysis_data)
-
     except FileNotFoundError:
         print("File not found.")
 
@@ -25,7 +23,6 @@ def analyse_file(path: str, filename: str) -> dict[str, any]:
 
 
 def initialize_statistics(filename: str) -> dict[str, any]:
-    """Initialize the statistics dictionary with default values."""
     return {
         "filename": filename,
         # ==== Basic statistics ====
@@ -63,8 +60,7 @@ def initialize_statistics(filename: str) -> dict[str, any]:
 
 
 def initialize_analysis_data() -> dict[str, any]:
-    """Initialize data structures used during analysis."""
-    return {
+    return {  # Initialize the data structures used during analysis
         "all_words": {},
         "word_lengths": [],
         "sentence_lengths": [],
@@ -74,7 +70,6 @@ def initialize_analysis_data() -> dict[str, any]:
 
 
 def process_line(line: str, statistics: dict, analysis_data: dict) -> None:
-    """Process a single line of text and update statistics."""
     statistics["total_lines"] += 1
 
     for char in line:
@@ -82,18 +77,16 @@ def process_line(line: str, statistics: dict, analysis_data: dict) -> None:
 
 
 def process_character(char: str, statistics: dict, analysis_data: dict) -> None:
-    """Process a single character and update analysis state."""
     statistics["total_characters_with_spaces"] += 1
 
-    # Update current sentence
     analysis_data["current_sentence"] += char
 
-    # Check for sentence end
+    # Check if we are at the end of a sentence
     if char in SENTENCE_ENDERS:
         analysis_data["sentence_lengths"].append(len(analysis_data["current_sentence"]))
         analysis_data["current_sentence"] = ""
 
-    # Process word boundaries
+    # Check if we are at the end of a word
     if char.isalpha():
         analysis_data["current_word"] += char.lower()
     else:
@@ -101,7 +94,6 @@ def process_character(char: str, statistics: dict, analysis_data: dict) -> None:
 
 
 def finalize_current_word(statistics: dict, analysis_data: dict) -> None:
-    """Finalize the current word if it exists and reset for next word."""
     current_word = analysis_data["current_word"]
     if current_word:
         statistics["total_words"] += 1
@@ -118,27 +110,24 @@ def finalize_current_word(statistics: dict, analysis_data: dict) -> None:
 
 
 def finalize_remaining_data(statistics: dict, analysis_data: dict) -> None:
-    """Finalize any remaining words or sentences at the end of the file."""
-    # Finalize current word if it exists
     finalize_current_word(statistics, analysis_data)
 
-    # Finalize current sentence if it exists (not ending with punctuation)
+    # Finalize current sentence if it exists, it might not be ending with punctuation
     if analysis_data["current_sentence"]:
         analysis_data["sentence_lengths"].append(len(analysis_data["current_sentence"]))
 
 
 def calculate_final_statistics(statistics: dict, analysis_data: dict) -> None:
-    """Calculate final statistics after processing all text."""
-    # Calculate averages
     if statistics["total_lines"] > 0:
-        statistics["avg_words_per_line"] = statistics["total_words"] / statistics["total_lines"]
+        statistics["avg_words_per_line"] = (
+            statistics["total_words"] / statistics["total_lines"]
+        )
 
     if statistics["total_words"] > 0:
         statistics["avg_char_per_word"] = (
             statistics["total_characters_without_spaces"] / statistics["total_words"]
         )
 
-    # Calculate most common words
     statistics["ten_most_common_words"] = most_common_words(analysis_data["all_words"])
 
 
