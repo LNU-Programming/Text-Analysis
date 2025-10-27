@@ -1,5 +1,5 @@
 SENTENCE_ENDERS = {".", "!", "?"}
-SENTENCE_EXCEPTIONS = ['dr.', 'mr.', 'mrs.', 'ms.']
+SENTENCE_EXCEPTIONS = ['dr.', 'mr.', 'mrs.', 'ms.', 'n.y.']
 PARAGRAPH_ENDERS = {"\n\n"}
 WORD_BOUNDARIES = {" ", "\t", "\n", ",", ";", ":"}
 TOP_WORDS_COUNT = 10
@@ -80,7 +80,13 @@ def process_line(line: str, statistics: dict, analysis_data: dict) -> None:
 def process_character(char: str, statistics: dict, analysis_data: dict) -> None:
     statistics["total_characters_with_spaces"] += 1
 
+    # Check if we are at the end of a word
+    if char.isalpha():
+        analysis_data["current_word"] += char.lower()
+    else:
+        finalize_current_word(statistics, analysis_data)
     # Check if we are at the end of a sentence
+    # TODO Add exceptions for the smallest sentences (like "dr.", "N.Y.", etc.)
     if char in SENTENCE_ENDERS:
         # Only process if the sentence contains words
         if analysis_data["current_sentence"].strip():
@@ -91,12 +97,6 @@ def process_character(char: str, statistics: dict, analysis_data: dict) -> None:
             statistics["shortest_sentence"] = analysis_data["current_sentence"] if len(analysis_data["current_sentence"]) < len(statistics["shortest_sentence"]) else statistics["shortest_sentence"]
             analysis_data["current_sentence"] = ""
             statistics["total_sentences"] += 1
-
-    # Check if we are at the end of a word
-    if char.isalpha():
-        analysis_data["current_word"] += char.lower()
-    else:
-        finalize_current_word(statistics, analysis_data)
 
 
 def finalize_current_word(statistics: dict, analysis_data: dict) -> None:
