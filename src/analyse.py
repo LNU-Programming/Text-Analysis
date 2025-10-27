@@ -1,4 +1,5 @@
-SENTENCE_ENDERS = {".", "!", "?", ';', '\n'}
+SENTENCE_ENDERS = {".", "!", "?"}
+SENTENCE_EXCEPTIONS = ['dr.', 'mr.', 'mrs.', 'ms.']
 PARAGRAPH_ENDERS = {"\n\n"}
 WORD_BOUNDARIES = {" ", "\t", "\n", ",", ";", ":"}
 TOP_WORDS_COUNT = 10
