@@ -84,7 +84,7 @@ def process_character(char: str, statistics: dict, analysis_data: dict) -> None:
 
     # Check if we are at the end of a sentence
     if char in SENTENCE_ENDERS:
-        # statistics["sentence_length_distribution"][len(analysis_data["current_sentence"])] += 1
+        statistics["sentence_length_distribution"][len(analysis_data["current_sentence"])] += 1
         statistics["longest_sentence"] = (
             analysis_data["current_sentence"]
             if len(analysis_data["current_sentence"])
@@ -138,7 +138,7 @@ def finalize_remaining_data(statistics: dict, analysis_data: dict) -> None:
 
     # Finalize the current sentence if it exists, it might not be ending with punctuation
     if analysis_data["current_sentence"]:
-        # statistics["sentence_length_distribution"][len(analysis_data["current_sentence"])] += 1
+        statistics["sentence_length_distribution"][len(analysis_data["current_sentence"])] += 1
         statistics["total_sentences"] += 1
 
 
