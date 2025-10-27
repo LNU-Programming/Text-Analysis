@@ -33,8 +33,7 @@ def initialize_statistics(filename: str) -> dict[str, any]:
         "total_characters_with_spaces": 0,
         "total_characters_without_spaces": 0,  # TODO
         "avg_words_per_line": 0.0,
-        "avg_words_per_sentence": 0.0,  # TODO
-        "avg_char_per_word": 0.0,  # TODO
+        "avg_char_per_word": 0.0,
         # ==== Word analysis ====
         "ten_most_common_words": {},
         "shortest_word": "",
@@ -62,10 +61,10 @@ def initialize_statistics(filename: str) -> dict[str, any]:
 def initialize_analysis_data() -> dict[str, any]:
     return {  # Initialize the data structures used during analysis
         "all_words": {},
-        "word_lengths": [],
+        "word_lengths": [0 for _ in range(45)],
         "sentence_lengths": [],
         "current_word": "",
-        "current_sentence": "",
+        "current_sentence": ""
     }
 
 
@@ -143,3 +142,13 @@ def most_common_words(all_words: dict) -> dict:
         all_words.pop(max_val)
 
     return top_words
+
+
+# Returns the length of the list, only counting elements different from 0
+def list_true_length(word_len_lst: list) -> int:
+    true_length = 0
+    for element in word_len_lst:
+        if element != 0:
+            true_length += 1
+
+    return true_length
