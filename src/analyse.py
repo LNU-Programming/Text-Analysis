@@ -44,9 +44,9 @@ def initialize_statistics(filename: str) -> dict[str, any]:
         "words_appearing_only_once": 0,
         # ==== Sentence analysis ====
         "average_words_per_sentence": 0.0, # TODO
-        "longest_sentence": "", # TODO
-        "shortest_sentence": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", # TODO
-        "sentence_length_distribution": [], # TODO
+        "longest_sentence": "", 
+        "shortest_sentence": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "sentence_length_distribution": [],
         # ==== Character analysis ====
         "total_letters": 0, # TODO
         "total_digits": 0, # TODO
@@ -83,7 +83,7 @@ def process_character(char: str, statistics: dict, analysis_data: dict) -> None:
 
     # Check if we are at the end of a sentence
     if char in SENTENCE_ENDERS:
-        analysis_data["sentence_lengths"].append(len(analysis_data["current_sentence"]))
+        statistics['sentence_length_distribution'].append(len(analysis_data["current_sentence"]))
         statistics['longest_sentence'] = analysis_data['current_sentence'] if len(analysis_data['current_sentence']) > len(statistics['longest_sentence']) else statistics['longest_sentence']
         statistics['shortest_sentence'] = analysis_data['current_sentence'] if len(analysis_data['current_sentence']) < len(statistics['shortest_sentence']) else statistics['shortest_sentence']
         analysis_data["current_sentence"] = ""
@@ -127,7 +127,7 @@ def finalize_remaining_data(statistics: dict, analysis_data: dict) -> None:
 
     # Finalize the current sentence if it exists, it might not be ending with punctuation
     if analysis_data["current_sentence"]:
-        analysis_data["sentence_lengths"].append(len(analysis_data["current_sentence"]))
+        statistics['sentence_length_distribution'].append(len(analysis_data["current_sentence"]))
         statistics["total_sentences"] += 1
 
 
