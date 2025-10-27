@@ -41,20 +41,20 @@ def initialize_statistics(filename: str) -> dict[str, any]:
         "avg_word_length": 0.0,
         "word_length_distribution": [],
         "unique_word_count": 0,
-        "words_appearing_only_once": 0,
+        "words_appearing_once": 0,
         # ==== Sentence analysis ====
-        "average_words_per_sentence": 0.0, # TODO
-        "longest_sentence": "", 
+        "average_words_per_sentence": 0.0,  # TODO
+        "longest_sentence": "",
         "shortest_sentence": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
         "sentence_length_distribution": [],
         # ==== Character analysis ====
-        "total_letters": 0, # TODO
-        "total_digits": 0, # TODO
-        "total_spaces": 0, # TODO
-        "total_punctuation": 0, # TODO
-        "letter_frequency_distribution": [], # TODO
-        "punctuation_distribution": [], # TODO
-        "case_distribution": [], # TODO
+        "total_letters": 0,  # TODO
+        "total_digits": 0,  # TODO
+        "total_spaces": 0,  # TODO
+        "total_punctuation": 0,  # TODO
+        "letter_frequency_distribution": [],  # TODO
+        "punctuation_distribution": [],  # TODO
+        "case_distribution": [],  # TODO
     }
 
 
@@ -65,7 +65,7 @@ def initialize_analysis_data() -> dict[str, any]:
         "sentence_lengths": [],
         "current_word": "",
         "current_sentence": "",
-        'unique_words': set(),
+        "unique_words": set(),
     }
 
 
@@ -83,9 +83,21 @@ def process_character(char: str, statistics: dict, analysis_data: dict) -> None:
 
     # Check if we are at the end of a sentence
     if char in SENTENCE_ENDERS:
-        statistics['sentence_length_distribution'].append(len(analysis_data["current_sentence"]))
-        statistics['longest_sentence'] = analysis_data['current_sentence'] if len(analysis_data['current_sentence']) > len(statistics['longest_sentence']) else statistics['longest_sentence']
-        statistics['shortest_sentence'] = analysis_data['current_sentence'] if len(analysis_data['current_sentence']) < len(statistics['shortest_sentence']) else statistics['shortest_sentence']
+        statistics["sentence_length_distribution"].append(
+            len(analysis_data["current_sentence"])
+        )
+        statistics["longest_sentence"] = (
+            analysis_data["current_sentence"]
+            if len(analysis_data["current_sentence"])
+            > len(statistics["longest_sentence"])
+            else statistics["longest_sentence"]
+        )
+        statistics["shortest_sentence"] = (
+            analysis_data["current_sentence"]
+            if len(analysis_data["current_sentence"])
+            < len(statistics["shortest_sentence"])
+            else statistics["shortest_sentence"]
+        )
         analysis_data["current_sentence"] = ""
         statistics["total_sentences"] += 1
 
@@ -100,7 +112,7 @@ def finalize_current_word(statistics: dict, analysis_data: dict) -> None:
     current_word = analysis_data["current_word"]
     if current_word:
         statistics["total_words"] += 1
-        analysis_data['unique_words'].add(current_word)
+        analysis_data["unique_words"].add(current_word)
         analysis_data["word_lengths"].append(len(current_word))
 
         # Update word frequency
@@ -111,13 +123,13 @@ def finalize_current_word(statistics: dict, analysis_data: dict) -> None:
 
         # Reset current word
         statistics["total_characters_without_spaces"] += len(current_word)
-        analysis_data['word_lengths'][len(current_word) - 1] += 1
+        analysis_data["word_lengths"][len(current_word) - 1] += 1
 
-        if len(statistics['shortest_word']) > len(current_word):
-            statistics['shortest_word'] = current_word
+        if len(statistics["shortest_word"]) > len(current_word):
+            statistics["shortest_word"] = current_word
 
-        if len(statistics['longest_word']) < len(current_word):
-            statistics['longest_word'] = current_word
+        if len(statistics["longest_word"]) < len(current_word):
+            statistics["longest_word"] = current_word
 
         analysis_data["current_word"] = ""
 
@@ -127,7 +139,9 @@ def finalize_remaining_data(statistics: dict, analysis_data: dict) -> None:
 
     # Finalize the current sentence if it exists, it might not be ending with punctuation
     if analysis_data["current_sentence"]:
-        statistics['sentence_length_distribution'].append(len(analysis_data["current_sentence"]))
+        statistics["sentence_length_distribution"].append(
+            len(analysis_data["current_sentence"])
+        )
         statistics["total_sentences"] += 1
 
 
@@ -143,11 +157,18 @@ def calculate_final_statistics(statistics: dict, analysis_data: dict) -> None:
         )
 
     statistics["ten_most_common_words"] = most_common_words(analysis_data["all_words"])
-    statistics['avg_word_length'] = sum(analysis_data['word_lengths']) / list_true_length(analysis_data['word_lengths'])
-    statistics['word_length_distribution'] = remove_trailing_zeros(analysis_data['word_lengths'])
+    statistics["avg_word_length"] = sum(
+        analysis_data["word_lengths"]
+    ) / list_true_length(analysis_data["word_lengths"])
+    statistics["word_length_distribution"] = remove_trailing_zeros(
+        analysis_data["word_lengths"]
+    )
 
-    statistics['unique_word_count'] = len(analysis_data['unique_words'])
-    statistics['words_appearing_only_once'] = word_appearing_only_once(analysis_data['all_words'])
+    statistics["unique_word_count"] = len(analysis_data["unique_words"])
+    statistics["words_appearing_once"] = word_appearing_only_once(
+        analysis_data["all_words"]
+    )
+
 
 def most_common_words(all_words: dict) -> dict:
     top_words = {}

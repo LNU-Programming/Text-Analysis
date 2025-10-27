@@ -10,7 +10,7 @@ def basic_statistics(statistics: dict) -> None:
     )
     print(f"Average words per line: {statistics['avg_words_per_line']:.2f}")
     print(f"Average words per sentence: {statistics['average_words_per_sentence']:.2f}")
-    print(f"Average word length: {statistics['avg_char_per_word']:.2f}")
+    print(f"Average word length: {statistics['avg_words_per_line']:.2f}")
 
     print("\nGenerating basic statistics visualization...")
     # TODO: generate Matplotlib visualization
@@ -21,16 +21,21 @@ def basic_statistics(statistics: dict) -> None:
 def word_analysis(statistics) -> None:
     print(f'--- Word Analysis for "{statistics["filename"]}" ---')
     print("Top 10 most common words:")
-    for i, word in enumerate(statistics["most_common_words"]):
+    for i, word in enumerate(statistics["ten_most_common_words"]):
         print(
-            f"{i + 1}. {word:<6}{statistics['most_common_words'][word]} times ({statistics['most_common_words'][word] / statistics['total_words'] * 100:.2f} %)"
+            f"{i + 1:<3}- {word:<8}{statistics['ten_most_common_words'][word]:<8} times ({statistics['ten_most_common_words'][word] / statistics['total_words'] * 100:.2f} %)"
         )
 
     print("\nWord length statistics:")
-    print(f"\tShortest word: 0 characters")
-    print(f"\tLongest word: 0 characters")
-    print(f"\tAverage word length: 0 characters")
-    print(f"Words appearing only once: 0")
+    print(
+        f"\tShortest word: {statistics['shortest_word']}, {len(statistics['shortest_word'])} characters"
+    )
+    print(
+        f"\tLongest word: {statistics['longest_word']}, {len(statistics['longest_word'])} characters"
+    )
+    print(f"\tAverage word length: {statistics['avg_word_length']:.2f} characters")
+    print(f"\tUnique word count: {statistics['unique_word_count']}")
+    print(f"\tWords appearing only once: {statistics['words_appearing_once']}")
 
     print("\nGenerating word analysis visualization...")
     # TODO: generate Matplotlib visualization
