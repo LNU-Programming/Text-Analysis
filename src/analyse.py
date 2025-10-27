@@ -1,4 +1,4 @@
-SENTENCE_ENDERS = {".", "!", "?", ';'}
+SENTENCE_ENDERS = {".", "!", "?", ';', '\n'}
 PARAGRAPH_ENDERS = {"\n\n"}
 WORD_BOUNDARIES = {" ", "\t", "\n", ",", ";", ":"}
 TOP_WORDS_COUNT = 10
@@ -43,7 +43,7 @@ def initialize_statistics(filename: str) -> dict[str, any]:
         "unique_word_count": 0,
         "words_appearing_once": 0,
         # ==== Sentence analysis ====
-        "average_words_per_sentence": 0.0,  # TODO
+        "average_words_per_sentence": 0.0,
         "longest_sentence": "",
         "shortest_sentence": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
         "sentence_length_distribution": [],
@@ -83,9 +83,7 @@ def process_character(char: str, statistics: dict, analysis_data: dict) -> None:
 
     # Check if we are at the end of a sentence
     if char in SENTENCE_ENDERS:
-        statistics["sentence_length_distribution"].append(
-            len(analysis_data["current_sentence"])
-        )
+        # statistics["sentence_length_distribution"][len(analysis_data["current_sentence"])] += 1
         statistics["longest_sentence"] = (
             analysis_data["current_sentence"]
             if len(analysis_data["current_sentence"])
@@ -139,9 +137,7 @@ def finalize_remaining_data(statistics: dict, analysis_data: dict) -> None:
 
     # Finalize the current sentence if it exists, it might not be ending with punctuation
     if analysis_data["current_sentence"]:
-        statistics["sentence_length_distribution"].append(
-            len(analysis_data["current_sentence"])
-        )
+        # statistics["sentence_length_distribution"][len(analysis_data["current_sentence"])] += 1
         statistics["total_sentences"] += 1
 
 
@@ -168,6 +164,8 @@ def calculate_final_statistics(statistics: dict, analysis_data: dict) -> None:
     statistics["words_appearing_once"] = word_appearing_only_once(
         analysis_data["all_words"]
     )
+
+    statistics['average_words_per_sentence'] = statistics['total_words'] / statistics['total_sentences']
 
 
 def most_common_words(all_words: dict) -> dict:
