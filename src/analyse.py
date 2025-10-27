@@ -37,25 +37,25 @@ def initialize_statistics(filename: str) -> dict[str, any]:
         "avg_char_per_word": 0.0,
         # ==== Word analysis ====
         "ten_most_common_words": {},
-        "shortest_word": "",
+        "shortest_word": "aaaaaaaaa",
         "longest_word": "",
-        "avg_word_length": 0.0,
-        "word_length_distribution": [],
-        "unique_word_count": 0,
-        "words_appearing_only_once": 0,
+        "avg_word_length": 0.0, # TODO
+        "word_length_distribution": [], # TODO
+        "unique_word_count": 0, # TODO
+        "words_appearing_only_once": 0, # TODO
         # ==== Sentence analysis ====
-        "average_words_per_sentence": 0.0,
-        "longest_sentence": "",
-        "shortest_sentence": "",
-        "sentence_length_distribution": [],
+        "average_words_per_sentence": 0.0, # TODO
+        "longest_sentence": "", # TODO
+        "shortest_sentence": "", # TODO
+        "sentence_length_distribution": [], # TODO
         # ==== Character analysis ====
-        "total_letters": 0,
-        "total_digits": 0,
-        "total_spaces": 0,
-        "total_punctuation": 0,
-        "letter_frequency_distribution": [],
-        "punctuation_distribution": [],
-        "case_distribution": [],
+        "total_letters": 0, # TODO
+        "total_digits": 0, # TODO
+        "total_spaces": 0, # TODO
+        "total_punctuation": 0, # TODO
+        "letter_frequency_distribution": [], # TODO
+        "punctuation_distribution": [], # TODO
+        "case_distribution": [], # TODO
     }
 
 
@@ -109,6 +109,13 @@ def finalize_current_word(statistics: dict, analysis_data: dict) -> None:
         # Reset current word
         statistics["total_characters_without_spaces"] += len(current_word)
         analysis_data['word_lengths'][len(current_word) - 1] += 1
+
+        if len(statistics['shortest_word']) > len(current_word):
+            statistics['shortest_word'] = current_word
+
+        if len(statistics['longest_word']) < len(current_word):
+            statistics['longest_word'] = current_word
+
         analysis_data["current_word"] = ""
 
 
