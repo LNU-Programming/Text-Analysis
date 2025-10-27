@@ -40,7 +40,7 @@ def initialize_statistics(filename: str) -> dict[str, any]:
         "shortest_word": "aaaaaaaaa",
         "longest_word": "",
         "avg_word_length": 0.0, # TODO
-        "word_length_distribution": [], # TODO
+        "word_length_distribution": [],
         "unique_word_count": 0, # TODO
         "words_appearing_only_once": 0, # TODO
         # ==== Sentence analysis ====
@@ -141,7 +141,7 @@ def calculate_final_statistics(statistics: dict, analysis_data: dict) -> None:
 
     statistics["ten_most_common_words"] = most_common_words(analysis_data["all_words"])
     statistics['avg_char_per_word'] = sum(analysis_data['word_lengths']) / list_true_length(analysis_data['word_lengths'])
-    statistics['']
+    statistics['word_length_distribution'] = remove_trailing_zeros(analysis_data['word_lengths'])
 
 
 def most_common_words(all_words: dict) -> dict:
