@@ -64,3 +64,23 @@ def sentence_analysis(statistics) -> None:
     print("Press Enter to continue...")
 
     return None
+
+def character_analysis(statistics) -> None:
+    print(f'\n--- Character Analysis for "{statistics["filename"]}" ---')
+    print('Character type distribution:')
+    # TODO: my brain fuzzy rn, I don't know how to do percentages LOL rip TuT
+    print(f'\tLetters: {statistics['total_letters']}, ({statistics['total_characters_with_spaces'] / statistics['total_letters']}%)')
+    print(f'\tDigits: {statistics["total_digits"]}, ({statistics["total_characters_with_spaces"] / statistics["total_digits"]}%)')
+    print(f'\tSpaces: {statistics["total_spaces"]}, ({statistics["total_characters_with_spaces"] / statistics["total_spaces"]}%)')
+    print(f'\tPunctuation: {statistics["total_punctuation"]}, ({statistics["total_characters_with_spaces"] / statistics["total_punctuation"]}%)')
+
+    print('\nMost common letters:')
+    for i, key in enumerate(statistics['letter_frequency_distribution']):
+        # TODO: Again, I can't count. Add the percentage in here pleaseeee
+        print(f'{i + 1:<3} - "{key}": {statistics['letter_frequency_distribution'][key]} (0%)')
+
+    print('Generating character analysis visualisation...')
+    # TODO: generate Matplotlib visualization
+    print('Press ENTER to continue...')
+
+    return None
