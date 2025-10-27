@@ -34,14 +34,13 @@ def initialize_statistics(filename: str) -> dict[str, any]:
         "total_characters_with_spaces": 0,
         "total_characters_without_spaces": 0,
         "avg_words_per_line": 0.0,
-        "avg_char_per_word": 0.0,
         # ==== Word analysis ====
         "ten_most_common_words": {},
         "shortest_word": "aaaaaaaaa",
         "longest_word": "",
-        "avg_word_length": 0.0, # TODO
+        "avg_word_length": 0.0,
         "word_length_distribution": [],
-        "unique_word_count": 0, # TODO
+        "unique_word_count": 0,
         "words_appearing_only_once": 0, # TODO
         # ==== Sentence analysis ====
         "average_words_per_sentence": 0.0, # TODO
@@ -65,7 +64,8 @@ def initialize_analysis_data() -> dict[str, any]:
         "word_lengths": [0 for _ in range(45)],
         "sentence_lengths": [],
         "current_word": "",
-        "current_sentence": ""
+        "current_sentence": "",
+        'unique_words': set(),
     }
 
 
@@ -98,6 +98,7 @@ def finalize_current_word(statistics: dict, analysis_data: dict) -> None:
     current_word = analysis_data["current_word"]
     if current_word:
         statistics["total_words"] += 1
+        analysis_data['unique_words'].add(current_word)
         analysis_data["word_lengths"].append(len(current_word))
 
         # Update word frequency
@@ -135,14 +136,15 @@ def calculate_final_statistics(statistics: dict, analysis_data: dict) -> None:
         )
 
     if statistics["total_words"] > 0:
-        statistics["avg_char_per_word"] = (
+        statistics["avg_word_length"] = (
             statistics["total_characters_without_spaces"] / statistics["total_words"]
         )
 
     statistics["ten_most_common_words"] = most_common_words(analysis_data["all_words"])
-    statistics['avg_char_per_word'] = sum(analysis_data['word_lengths']) / list_true_length(analysis_data['word_lengths'])
+    statistics['avg_word_length'] = sum(analysis_data['word_lengths']) / list_true_length(analysis_data['word_lengths'])
     statistics['word_length_distribution'] = remove_trailing_zeros(analysis_data['word_lengths'])
 
+    statistics['unique_word_count'] = len(analysis_data['unique_words'])
 
 def most_common_words(all_words: dict) -> dict:
     top_words = {}
