@@ -2,6 +2,7 @@ from string import printable
 import load
 import time
 import display
+import export
 
 
 def main():
@@ -42,9 +43,9 @@ def main():
             case "4":
                 display.sentence_analysis(statistics)
             case "5":
-                print("Choice five!")
+                display.character_analysis(statistics)
             case "6":
-                print("Choice six!")
+                export.export_results(statistics)
             case "0":
                 print("Exiting the program...")
                 flag = False
