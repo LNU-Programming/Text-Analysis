@@ -9,7 +9,7 @@ def basic_statistics(statistics: dict) -> None:
         f"Characters (without spaces): {statistics['total_characters_without_spaces']}"
     )
     print(f"Average words per line: {statistics['avg_words_per_line']:.2f}")
-    print(f"Average words per sentence: {statistics['avg_words_per_sentence']:.2f}")
+    print(f"Average words per sentence: {statistics['average_words_per_sentence']:.2f}")
     print(f"Average word length: {statistics['avg_char_per_word']:.2f}")
 
     print("\nGenerating basic statistics visualization...")

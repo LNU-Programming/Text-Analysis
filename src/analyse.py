@@ -1,4 +1,5 @@
 SENTENCE_ENDERS = {".", "!", "?"}
+PARAGRAPH_ENDERS = {"\n\n"}
 WORD_BOUNDARIES = {" ", "\t", "\n", ",", ";", ":"}
 TOP_WORDS_COUNT = 10
 
@@ -31,7 +32,7 @@ def initialize_statistics(filename: str) -> dict[str, any]:
         "total_sentences": 0,
         "total_words": 0,
         "total_characters_with_spaces": 0,
-        "total_characters_without_spaces": 0,  # TODO
+        "total_characters_without_spaces": 0,
         "avg_words_per_line": 0.0,
         "avg_char_per_word": 0.0,
         # ==== Word analysis ====
@@ -106,13 +107,15 @@ def finalize_current_word(statistics: dict, analysis_data: dict) -> None:
             analysis_data["all_words"][current_word] = 1
 
         # Reset current word
+        statistics["total_characters_without_spaces"] += len(current_word)
+        analysis_data['word_lengths'][len(current_word) - 1] += 1
         analysis_data["current_word"] = ""
 
 
 def finalize_remaining_data(statistics: dict, analysis_data: dict) -> None:
     finalize_current_word(statistics, analysis_data)
 
-    # Finalize current sentence if it exists, it might not be ending with punctuation
+    # Finalize current senthence if it exists, it might not be ending with punctuation
     if analysis_data["current_sentence"]:
         analysis_data["sentence_lengths"].append(len(analysis_data["current_sentence"]))
         statistics["total_sentences"] += 1
@@ -130,6 +133,7 @@ def calculate_final_statistics(statistics: dict, analysis_data: dict) -> None:
         )
 
     statistics["ten_most_common_words"] = most_common_words(analysis_data["all_words"])
+    statistics['avg_char_per_word'] = sum(analysis_data['word_lengths']) / list_true_length(analysis_data['word_lengths'])
 
 
 def most_common_words(all_words: dict) -> dict:
