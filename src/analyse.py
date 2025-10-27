@@ -1,4 +1,4 @@
-SENTENCE_ENDERS = {".", "!", "?", ":"}
+SENTENCE_ENDERS = {".", "!", "?"}
 SENTENCE_EXCEPTIONS = ['dr.', 'mr.', 'mrs.', 'ms.']
 PARAGRAPH_ENDERS = {"\n\n"}
 WORD_BOUNDARIES = {" ", "\t", "\n", ",", ";", ":"}
@@ -82,13 +82,15 @@ def process_character(char: str, statistics: dict, analysis_data: dict) -> None:
 
     # Check if we are at the end of a sentence
     if char in SENTENCE_ENDERS:
-        statistics['sentence_length_distribution'] = add_sentence_length_distribution(statistics["sentence_length_distribution"], analysis_data["current_sentence"])
+        # Only process if the sentence contains words
+        if analysis_data["current_sentence"].strip():
+            statistics['sentence_length_distribution'] = add_sentence_length_distribution(statistics["sentence_length_distribution"], analysis_data["current_sentence"])
 
-        statistics["longest_sentence"] = analysis_data["current_sentence"] if len(analysis_data["current_sentence"]) > len(statistics["longest_sentence"]) else statistics["longest_sentence"]
+            statistics["longest_sentence"] = analysis_data["current_sentence"] if len(analysis_data["current_sentence"]) > len(statistics["longest_sentence"]) else statistics["longest_sentence"]
 
-        statistics["shortest_sentence"] = analysis_data["current_sentence"] if len(analysis_data["current_sentence"]) < len(statistics["shortest_sentence"]) else statistics["shortest_sentence"]
-        analysis_data["current_sentence"] = ""
-        statistics["total_sentences"] += 1
+            statistics["shortest_sentence"] = analysis_data["current_sentence"] if len(analysis_data["current_sentence"]) < len(statistics["shortest_sentence"]) else statistics["shortest_sentence"]
+            analysis_data["current_sentence"] = ""
+            statistics["total_sentences"] += 1
 
     # Check if we are at the end of a word
     if char.isalpha():
@@ -109,6 +111,12 @@ def finalize_current_word(statistics: dict, analysis_data: dict) -> None:
             analysis_data["all_words"][current_word] += 1
         else:
             analysis_data["all_words"][current_word] = 1
+
+        # Add word to current sentence
+        if analysis_data["current_sentence"]:
+            analysis_data["current_sentence"] += " " + current_word
+        else:
+            analysis_data["current_sentence"] = current_word
 
         # Reset current word
         statistics["total_characters_without_spaces"] += len(current_word)
