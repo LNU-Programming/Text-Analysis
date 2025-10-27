@@ -141,6 +141,7 @@ def calculate_final_statistics(statistics: dict, analysis_data: dict) -> None:
 
     statistics["ten_most_common_words"] = most_common_words(analysis_data["all_words"])
     statistics['avg_char_per_word'] = sum(analysis_data['word_lengths']) / list_true_length(analysis_data['word_lengths'])
+    statistics['']
 
 
 def most_common_words(all_words: dict) -> dict:
@@ -163,3 +164,11 @@ def list_true_length(word_len_lst: list) -> int:
             true_length += 1
 
     return true_length
+
+
+def remove_trailing_zeros(word_len_lst: list) -> list:
+    for index, word_len in enumerate(word_len_lst[::-1]):
+        if word_len != 0:
+            return word_len_lst[0:index]
+
+    return word_len_lst
