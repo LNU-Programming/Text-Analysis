@@ -123,7 +123,7 @@ def finalize_current_word(statistics: dict, analysis_data: dict) -> None:
 def finalize_remaining_data(statistics: dict, analysis_data: dict) -> None:
     finalize_current_word(statistics, analysis_data)
 
-    # Finalize current senthence if it exists, it might not be ending with punctuation
+    # Finalize the current sentence if it exists, it might not be ending with punctuation
     if analysis_data["current_sentence"]:
         analysis_data["sentence_lengths"].append(len(analysis_data["current_sentence"]))
         statistics["total_sentences"] += 1
@@ -145,6 +145,7 @@ def calculate_final_statistics(statistics: dict, analysis_data: dict) -> None:
     statistics['word_length_distribution'] = remove_trailing_zeros(analysis_data['word_lengths'])
 
     statistics['unique_word_count'] = len(analysis_data['unique_words'])
+    statistics['words_appearing_only_once'] = word_appearing_only_once(analysis_data['all_words'])
 
 def most_common_words(all_words: dict) -> dict:
     top_words = {}
@@ -174,3 +175,13 @@ def remove_trailing_zeros(word_len_lst: list) -> list:
             return word_len_lst[0:index]
 
     return word_len_lst
+
+
+def word_appearing_only_once(all_words: dict) -> int:
+    words_only_once = 0
+
+    for word in all_words:
+        if all_words[word] == 1:
+            words_only_once += 1
+
+    return words_only_once
