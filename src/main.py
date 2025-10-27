@@ -40,7 +40,7 @@ def main():
             case "3":
                 display.word_analysis(statistics)
             case "4":
-                print("Choice four!")
+                display.sentence_analysis(statistics)
             case "5":
                 print("Choice five!")
             case "6":

@@ -1,4 +1,4 @@
-SENTENCE_ENDERS = {".", "!", "?"}
+SENTENCE_ENDERS = {".", "!", "?", ';'}
 PARAGRAPH_ENDERS = {"\n\n"}
 WORD_BOUNDARIES = {" ", "\t", "\n", ",", ";", ":"}
 TOP_WORDS_COUNT = 10

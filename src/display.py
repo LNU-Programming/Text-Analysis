@@ -34,8 +34,8 @@ def word_analysis(statistics) -> None:
         f"\tLongest word: {statistics['longest_word']}, {len(statistics['longest_word'])} characters"
     )
     print(f"\tAverage word length: {statistics['avg_word_length']:.2f} characters")
-    print(f"\tUnique word count: {statistics['unique_word_count']}")
-    print(f"\tWords appearing only once: {statistics['words_appearing_once']}")
+    print(f"Unique word count: {statistics['unique_word_count']}")
+    print(f"Words appearing only once: {statistics['words_appearing_once']}")
 
     print("\nGenerating word analysis visualization...")
     # TODO: generate Matplotlib visualization
@@ -44,13 +44,23 @@ def word_analysis(statistics) -> None:
 
 
 def sentence_analysis(statistics) -> None:
-    print(f'--- Sentence Analysis for "{statistics["filename"]}" ---')
-    print(f"Total sentences: 0")
-    print(f"Average words per sentence: 0")
-    print(f"Shortest sentence: 0")
-    print(f"Longest sentence: 0")
+    print(f'\n--- Sentence Analysis for "{statistics["filename"]}" ---')
+    print(f"Total sentences: {statistics['total_sentences']}")
+    print(f"Average words per sentence: {statistics['average_words_per_sentence']:.2f}")
+    print(f"Shortest sentence: {len(statistics['shortest_sentence'])}")
+    print(f"Longest sentence: {len(statistics['longest_sentence'])}")
 
-    print(f"Shortest sentence text: a")
-    print(f"Longest sentence text: a")
+    print(f"Shortest sentence text: {statistics['shortest_sentence']}")
+    print(f"Longest sentence text: {statistics['longest_sentence']}")
+
+    print("\nSentence length distribution:")
+    for i, element in enumerate(statistics["sentence_length_distribution"]):
+        print(
+            f"{i + 1:<3} words: {element:<8} sentences ({element / statistics['total_sentences'] * 100:.2f} %)"
+        )
+
+    print("Generating sentence analysis visualisation...")
+
+    print("Press Enter to continue...")
 
     return None
