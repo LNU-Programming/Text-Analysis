@@ -10,7 +10,7 @@ def basic_statistics(statistics: dict) -> None:
     )
     print(f"Average words per line: {statistics['avg_words_per_line']:.2f}")
     print(f"Average words per sentence: {statistics['average_words_per_sentence']:.2f}")
-    print(f"Average word length: {statistics['avg_words_per_line']:.2f}")
+    print(f"Average word length: {statistics['avg_word_length']:.2f}")
 
     print("\nGenerating basic statistics visualization...")
     # TODO: generate Matplotlib visualization
