@@ -1,21 +1,22 @@
 # Color codes
-RED = '\033[91m'
-GREEN = '\033[92m'
-YELLOW = '\033[93m'
-BLUE = '\033[94m'
-MAGENTA = '\033[95m'
-CYAN = '\033[96m'
-WHITE = '\033[97m'
-RESET = '\033[0m'  # Reset to default color
-BOLD = '\033[1m'
+RED = "\033[91m"
+GREEN = "\033[92m"
+YELLOW = "\033[93m"
+BLUE = "\033[94m"
+MAGENTA = "\033[95m"
+CYAN = "\033[96m"
+WHITE = "\033[97m"
+RESET = "\033[0m"  # Reset to default color
+BOLD = "\033[1m"
 
 SENTENCE_ENDERS = {".", "!", "?"}
-SENTENCE_EXCEPTIONS = ['dr.', 'mr.', 'mrs.', 'ms.']
+SENTENCE_EXCEPTIONS = ["dr.", "mr.", "mrs.", "ms."]
 PARAGRAPH_ENDERS = {"\n\n"}
 WORD_BOUNDARIES = {" ", "\t", "\n", ",", ";", ":"}
 TOP_WORDS_COUNT = 10
 
 # TODO: for newlines, couldn't we just check 'if line is just a newline, it's paragrah?
+
 
 def analyse_file(path: str, filename: str) -> dict[str, any]:
     statistics = initialize_statistics(filename)
@@ -31,7 +32,9 @@ def analyse_file(path: str, filename: str) -> dict[str, any]:
     except FileNotFoundError:
         print("File not found.")
 
-    print(f"{GREEN}Analysis complete! Processed {statistics['total_lines']} lines.{RESET}")
+    print(
+        f"{GREEN}Analysis complete! Processed {statistics['total_lines']} lines.{RESET}"
+    )
     print(f'{GREEN}Successfully loaded and analyzed "{statistics["filename"]}"{RESET}')
     return statistics
 
@@ -40,26 +43,26 @@ def initialize_statistics(filename: str) -> dict[str, any]:
     return {
         "filename": filename,
         # ==== Basic statistics ====
-        "total_lines": 0,                       # Ok
-        "total_paragraphs": 0,                  # TODO
-        "total_sentences": 0,                   # FIX: number is way off
-        "total_words": 0,                       # Ok
-        "total_characters_with_spaces": 0,      # Ok
-        "total_characters_without_spaces": 0,   # Ok
+        "total_lines": 0,  # Ok
+        "total_paragraphs": 0,  # TODO
+        "total_sentences": 0,  # FIX: number is way off
+        "total_words": 0,  # Ok
+        "total_characters_with_spaces": 0,  # Ok
+        "total_characters_without_spaces": 0,  # Ok
         "avg_words_per_line": 0.0,
         # ==== Word analysis ====
-        "ten_most_common_words": {},            # Ok
-        "shortest_word": "aaaaaaaaa",           # Ok
-        "longest_word": "",                     # Ok
-        "avg_word_length": 0.0,                 # FIX: number way off
+        "ten_most_common_words": {},  # Ok
+        "shortest_word": "aaaaaaaaa",  # Ok
+        "longest_word": "",  # Ok
+        "avg_word_length": 0.0,  # FIX: number way off
         "word_length_distribution": [],
-        "unique_word_count": 0,                 # Seems ok, double check
-        "words_appearing_once": 0,              # Seems ok, double check
+        "unique_word_count": 0,  # Seems ok, double check
+        "words_appearing_once": 0,  # Seems ok, double check
         # ==== Sentence analysis ====
-        "average_words_per_sentence": 0.0,      # TODO: fix, number is way off
-        "longest_sentence": "",                 # FIX: not working
-        "shortest_sentence": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", # FIX: not working
-        "sentence_length_distribution": [],     # FIX: not working
+        "average_words_per_sentence": 0.0,  # TODO: fix, number is way off
+        "longest_sentence": "",  # FIX: not working
+        "shortest_sentence": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",  # FIX: not working
+        "sentence_length_distribution": [],  # FIX: not working
         # ==== Character analysis ====
         "total_letters": 0,  # TODO
         "total_digits": 0,  # TODO
@@ -73,7 +76,7 @@ def initialize_statistics(filename: str) -> dict[str, any]:
 
 def initialize_analysis_data() -> dict[str, any]:
     return {  # Initialize the data structures used during analysis
-        "all_words": {}, # used for 10 most common words
+        "all_words": {},  # used for 10 most common words
         "word_lengths": [0 for _ in range(45)],
         "sentence_lengths": [],
         "current_word": "",
@@ -91,13 +94,14 @@ def process_line(line: str, statistics: dict, analysis_data: dict) -> None:
 
 def process_character(char: str, statistics: dict, analysis_data: dict) -> None:
     statistics["total_characters_with_spaces"] += 1
+    analysis_data["current_sentence"] += char
 
     # Check if we are at the end of a sentence
     if char in SENTENCE_ENDERS:
-        statistics['sentence_length_distribution'] = add_sentence_length_distribution(statistics["sentence_length_distribution"], analysis_data["current_sentence"])
+        statistics["sentence_length_distribution"] = add_sentence_length_distribution(statistics["sentence_length_distribution"], analysis_data["current_sentence"])
 
-        statistics["longest_sentence"] = analysis_data["current_sentence"] if len(analysis_data["current_sentence"]) > len(statistics["longest_sentence"]) else statistics["longest_sentence"]
-        statistics["shortest_sentence"] = analysis_data["current_sentence"] if len(analysis_data["current_sentence"]) < len(statistics["shortest_sentence"]) else statistics["shortest_sentence"]
+        statistics["longest_sentence"] = (analysis_data["current_sentence"] if length_in_words(analysis_data["current_sentence"]) > length_in_words(statistics["longest_sentence"]) else statistics["longest_sentence"])
+        statistics["shortest_sentence"] = (analysis_data["current_sentence"] if length_in_words(analysis_data["current_sentence"]) < length_in_words(statistics["shortest_sentence"]) else statistics["shortest_sentence"])
 
         statistics["total_sentences"] += 1
 
@@ -116,12 +120,12 @@ def finalize_current_word(statistics: dict, analysis_data: dict) -> None:
     if current_word:
         statistics["total_words"] += 1
 
-        analysis_data["unique_words"].add(current_word) # unique_words is a set
+        analysis_data["unique_words"].add(current_word)  # unique_words is a set
 
         # analysis_data["word_lengths"].append(len(current_word)) # TODO: I think it's wrong? What does this even do? Why is it here?
-                                                                  # Shouldn't we add it to word_length_distribution? We are doing it in line 118 wtf
+        # Shouldn't we add it to word_length_distribution? We are doing it in line 118 wtf
         # Update word frequency
-        if current_word in analysis_data["all_words"]: # all_words is a dict
+        if current_word in analysis_data["all_words"]:  # all_words is a dict
             analysis_data["all_words"][current_word] += 1
         else:
             analysis_data["all_words"][current_word] = 1
@@ -145,29 +149,44 @@ def finalize_remaining_data(statistics: dict, analysis_data: dict) -> None:
 
     # Finalize the current sentence if it exists, it might not be ending with punctuation
     if analysis_data["current_sentence"]:
-        statistics['sentence_length_distribution'] = add_sentence_length_distribution(statistics["sentence_length_distribution"], analysis_data["current_sentence"])
+        statistics["sentence_length_distribution"] = add_sentence_length_distribution(
+            statistics["sentence_length_distribution"],
+            analysis_data["current_sentence"],
+        )
 
         statistics["total_sentences"] += 1
 
 
 def calculate_final_statistics(statistics: dict, analysis_data: dict) -> None:
     if statistics["total_lines"] > 0:
-        statistics["avg_words_per_line"] = (statistics["total_words"] / statistics["total_lines"])
+        statistics["avg_words_per_line"] = (
+            statistics["total_words"] / statistics["total_lines"]
+        )
 
     if statistics["total_words"] > 0:
-        statistics["avg_word_length"] = (statistics["total_characters_without_spaces"] / statistics["total_words"])
+        statistics["avg_word_length"] = (
+            statistics["total_characters_without_spaces"] / statistics["total_words"]
+        )
 
     statistics["ten_most_common_words"] = most_common_words(analysis_data["all_words"])
 
-    statistics["avg_word_length"] = sum(analysis_data["word_lengths"]) / list_true_length(analysis_data["word_lengths"])
+    statistics["avg_word_length"] = sum(
+        analysis_data["word_lengths"]
+    ) / list_true_length(analysis_data["word_lengths"])
 
-    statistics["word_length_distribution"] = remove_trailing_zeros(analysis_data["word_lengths"])
+    statistics["word_length_distribution"] = remove_trailing_zeros(
+        analysis_data["word_lengths"]
+    )
 
     statistics["unique_word_count"] = len(analysis_data["unique_words"])
 
-    statistics["words_appearing_once"] = word_appearing_only_once(analysis_data["all_words"])
+    statistics["words_appearing_once"] = word_appearing_only_once(
+        analysis_data["all_words"]
+    )
 
-    statistics['average_words_per_sentence'] = statistics['total_words'] / statistics['total_sentences']
+    statistics["average_words_per_sentence"] = (
+        statistics["total_words"] / statistics["total_sentences"]
+    )
 
 
 def most_common_words(all_words: dict) -> dict:
@@ -211,12 +230,20 @@ def word_appearing_only_once(all_words: dict) -> int:
 
 
 def length_in_words(sentence: str) -> int:
-    return len(sentence.split(' '))
+    cleaned_sentence = ""
+    for char in sentence:
+        if char.isalpha() or char.isspace():
+            cleaned_sentence += char
+        else:
+            cleaned_sentence += " "
+
+    words = cleaned_sentence.split()
+    return len(words)
 
 
 def add_sentence_length_distribution(sentence_length_distribution: list, current_sentence: str) -> list:
     if len(sentence_length_distribution) < length_in_words(current_sentence):
-        sentence_length_distribution.extend( [0 for _ in range(len(sentence_length_distribution), length_in_words(current_sentence))] ) # TODO: needs doublechecking
+        sentence_length_distribution.extend([0 for _ in range(len(sentence_length_distribution), length_in_words(current_sentence))])  # TODO: needs doublechecking
         sentence_length_distribution[length_in_words(current_sentence) - 1] = 1
     else:
         sentence_length_distribution[length_in_words(current_sentence) - 1] += 1
