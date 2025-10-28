@@ -69,8 +69,8 @@ def initialize_statistics(filename: str) -> dict[str, any]:
         "total_spaces": 0,  # Ok
         "total_punctuation": 0,  # Ok
         "letter_frequency_distribution": {},  # Ok
-        "punctuation_distribution": {},  # TODO
-        "case_distribution": [],  # TODO
+        "punctuation_distribution": {},  # Ok
+        "case_distribution": [0, 0],  # Ok
     }
 
 
@@ -125,6 +125,11 @@ def process_character(char: str, statistics: dict, analysis_data: dict) -> None:
     # Check if we are at the end of a word
     if char.isalpha():
         analysis_data["current_word"] += char.lower()
+
+        if char.isupper():
+            statistics['case_distribution'][1] += 1
+        else:
+            statistics["case_distribution"][0] += 1
 
         # Add letter to distribution
         # TODO: turn into a function

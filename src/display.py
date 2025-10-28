@@ -99,6 +99,9 @@ def character_analysis(statistics) -> None:
             'total_characters_with_spaces']) * 100
         print(f'{i + 1:<2} - "{key}" : {statistics['punctuation_distribution'][key]:<8} ({percentage:.2f}%)')
 
+    print('\nLower/upper case distribution:')
+    print(f'\tLower characters: {statistics['case_distribution'][0]}')
+    print(f'\tUpper characters: {statistics['case_distribution'][1]}')
 
     print('Generating character analysis visualisation...')
     # TODO: generate Matplotlib visualization
