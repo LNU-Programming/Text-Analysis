@@ -3,7 +3,6 @@ import analyse
 
 
 def load_file() -> dict[str, any]:
-    # TODO: CAREFUL. The path should be relative to the current file, right now it's relative to where you execute the file!
     path = "../data/"
     print("\n--- File Selection ---\nAvailable text files:")
     try:

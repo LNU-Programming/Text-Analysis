@@ -28,8 +28,6 @@ def main():
 
         choice = input("\n\tInsert your choice (0 - 6): ")
 
-        # TODO: If the book is not loaded yet, there is no point in accessing any
-        # menu other than the 1st one.
         match choice:
             case "1":
                 statistics = load.load_file()
