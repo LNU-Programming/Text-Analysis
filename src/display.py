@@ -88,10 +88,17 @@ def character_analysis(statistics) -> None:
     print(f'\tSpaces: {statistics["total_spaces"]}, {percentage_spaces:.2f}%')
     print(f'\tPunctuation: {statistics["total_punctuation"]}, {percentage_punctuation:.2f}%')
 
-    print('\nMost common letters:')
+    print('\nLetters distribution:')
     for i, key in enumerate(statistics['letter_frequency_distribution']):
         percentage = (statistics['letter_frequency_distribution'][key] / statistics['total_characters_with_spaces']) * 100
         print(f'{i + 1:<2} - "{key}" : {statistics['letter_frequency_distribution'][key]:<8} ({percentage:.2f}%)')
+
+    print('\nPunctuation distribution:')
+    for i, key in enumerate(statistics['punctuation_distribution']):
+        percentage = (statistics['punctuation_distribution'][key] / statistics[
+            'total_characters_with_spaces']) * 100
+        print(f'{i + 1:<2} - "{key}" : {statistics['punctuation_distribution'][key]:<8} ({percentage:.2f}%)')
+
 
     print('Generating character analysis visualisation...')
     # TODO: generate Matplotlib visualization
