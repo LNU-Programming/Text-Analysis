@@ -1,3 +1,15 @@
+# Color codes
+RED = '\033[91m'
+GREEN = '\033[92m'
+YELLOW = '\033[93m'
+BLUE = '\033[94m'
+MAGENTA = '\033[95m'
+CYAN = '\033[96m'
+WHITE = '\033[97m'
+RESET = '\033[0m'  # Reset to default color
+BOLD = '\033[1m'
+
+
 SENTENCE_ENDERS = {".", "!", "?", ":"}
 SENTENCE_EXCEPTIONS = ['dr.', 'mr.', 'mrs.', 'ms.']
 PARAGRAPH_ENDERS = {"\n\n"}
@@ -20,8 +32,8 @@ def analyse_file(path: str, filename: str) -> dict[str, any]:
     except FileNotFoundError:
         print("File not found.")
 
-    print(f"Analysis complete! Processed {statistics['total_lines']} lines.")
-    print(f'Successfully loaded and analyzed "{statistics["filename"]}"')
+    print(f"{GREEN}Analysis complete! Processed {statistics['total_lines']} lines.{RESET}")
+    print(f'{GREEN}Successfully loaded and analyzed "{statistics["filename"]}"{RESET}')
     return statistics
 
 

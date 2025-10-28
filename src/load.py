@@ -1,6 +1,16 @@
 import os
 import analyse
 
+# Color codes
+RED = '\033[91m'
+GREEN = '\033[92m'
+YELLOW = '\033[93m'
+BLUE = '\033[94m'
+MAGENTA = '\033[95m'
+CYAN = '\033[96m'
+WHITE = '\033[97m'
+RESET = '\033[0m'  # Reset to default color
+BOLD = '\033[1m'
 
 def load_file() -> dict[str, any]:
     path = "../data/"
@@ -10,7 +20,7 @@ def load_file() -> dict[str, any]:
             if x.endswith(".txt"):
                 print(f"{index + 1}) {x}")
     except FileNotFoundError:
-        print("File or directory not found.")
+        print(f"{RED}File or directory not found.{RESET}")
         return {"filename": ""}
 
     try:
@@ -20,8 +30,8 @@ def load_file() -> dict[str, any]:
         if 0 < choice <= len(selected_files):
             print(f"\nAnalyzing {selected_files[choice - 1]}...")
             return analyse.analyse_file(path, selected_files[choice - 1])
-        print(f"Please enter a number between 1 and {len(selected_files)}")
+        print(f"{RED}Please enter a number between 1 and {len(selected_files)}{RESET}")
         return load_file()
     except ValueError:
-        print("Invalid input!")
+        print(f"{RED}Invalid input!{RESET}")
         return load_file()
