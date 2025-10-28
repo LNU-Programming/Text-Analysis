@@ -11,7 +11,6 @@ BOLD = "\033[1m"
 
 SENTENCE_ENDERS = (".", "!", "?", ':--')
 SENTENCE_EXCEPTIONS = ["dr.", "mr.", "mrs.", "ms."]
-PARAGRAPH_ENDERS = {"\n\n"}
 WORD_BOUNDARIES = {" ", "\t", "\n", ",", ";", ":"}
 TOP_WORDS_COUNT = 10
 
@@ -22,9 +21,13 @@ def analyse_file(path: str, filename: str) -> dict[str, any]:
     analysis_data = initialize_analysis_data()
 
     try:
-        with open(f"{path}{filename}", "r") as file:
+        with open(f"{path}{filename}", "r", encoding='utf-8') as file:
             for line in file:
                 process_line(line, statistics, analysis_data)
+
+                # According to all the paragraph counting websites this is how paragraphs are counted.
+                if line.strip():
+                    statistics['total_paragraphs'] += 1
 
         finalize_remaining_data(statistics, analysis_data)
         calculate_final_statistics(statistics, analysis_data)
@@ -228,6 +231,7 @@ def length_in_words(sentence: str) -> int:
 
 
 def add_sentence_length_distribution(sentence_length_distribution: list, current_sentence: str) -> list:
+    # Checks if the sentence is not just a single dot.
     if length_in_words(current_sentence) > 0:
         if len(sentence_length_distribution) < length_in_words(current_sentence):
             # The list is extended by as many spaces as the difference between the current sentence and the distribution list
