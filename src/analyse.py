@@ -14,6 +14,7 @@ SENTENCE_EXCEPTIONS = ["dr.", "mr.", "mrs.", "ms."]
 PARAGRAPH_ENDERS = {"\n\n"}
 WORD_BOUNDARIES = {" ", "\t", "\n", ",", ";", ":"}
 TOP_WORDS_COUNT = 10
+PUNCTUATION = ('!', '"', '#', '$', '%', '&', "'", '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<', '=', '>', '?', '@', '[', '\\', ']', '^', '_', '`', '{', '|', '}', '~')
 
 # TODO: for paragraphs, couldn't we just check 'if line is just a newline, it's paragraph?
 
@@ -44,7 +45,7 @@ def initialize_statistics(filename: str) -> dict[str, any]:
         # ==== Basic statistics ====
         "total_lines": 0,  # Ok
         "total_paragraphs": 0,  # TODO
-        "total_sentences": 0,  # FIX: number is way off
+        "total_sentences": 0,  # Ok
         "total_words": 0,  # Ok
         "total_characters_with_spaces": 0,  # Ok
         "total_characters_without_spaces": 0,  # Ok
@@ -63,10 +64,10 @@ def initialize_statistics(filename: str) -> dict[str, any]:
         "shortest_sentence": "aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa",  # FIX: not working
         "sentence_length_distribution": [],  # FIX: not working
         # ==== Character analysis ====
-        "total_letters": 0,  # TODO
-        "total_digits": 0,  # TODO
-        "total_spaces": 0,  # TODO
-        "total_punctuation": 0,  # TODO
+        "total_letters": 0,  # Ok
+        "total_digits": 0,  # Ok
+        "total_spaces": 0,  # Ok
+        "total_punctuation": 0,  # Ok
         "letter_frequency_distribution": {},  # TODO
         "punctuation_distribution": [],  # TODO
         "case_distribution": [],  # TODO
@@ -106,9 +107,20 @@ def process_character(char: str, statistics: dict, analysis_data: dict) -> None:
 
         analysis_data["current_sentence"] = ""
 
+    if char.isdigit():
+        statistics['total_digits'] += 1
+
+    if char.isspace():
+        statistics['total_spaces'] += 1
+
+    if char in PUNCTUATION:
+        statistics['total_punctuation'] += 1
+
     # Check if we are at the end of a word
     if char.isalpha():
         analysis_data["current_word"] += char.lower()
+
+        statistics['total_letters'] += 1
     else:
         finalize_current_word(statistics, analysis_data)
 

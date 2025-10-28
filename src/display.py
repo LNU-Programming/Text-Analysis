@@ -71,16 +71,27 @@ def sentence_analysis(statistics) -> None:
 def character_analysis(statistics) -> None:
     print(f'\n--- Character Analysis for "{statistics["filename"]}" ---')
     print('Character type distribution:')
-    # TODO: my brain fuzzy rn, I don't know how to do percentages LOL rip TuT
-    print(f'\tLetters: {statistics['total_letters']}, ({statistics['total_characters_with_spaces'] / statistics['total_letters']}%)')
-    print(f'\tDigits: {statistics["total_digits"]}, ({statistics["total_characters_with_spaces"] / statistics["total_digits"]}%)')
-    print(f'\tSpaces: {statistics["total_spaces"]}, ({statistics["total_characters_with_spaces"] / statistics["total_spaces"]}%)')
-    print(f'\tPunctuation: {statistics["total_punctuation"]}, ({statistics["total_characters_with_spaces"] / statistics["total_punctuation"]}%)')
+
+    if statistics['total_characters_with_spaces'] > 0:
+        percentage_letters = (statistics['total_letters'] / statistics['total_characters_with_spaces']) * 100
+        percentage_digits = (statistics['total_digits'] / statistics['total_characters_with_spaces']) * 100
+        percentage_spaces = (statistics['total_spaces'] / statistics['total_characters_with_spaces']) * 100
+        percentage_punctuation = (statistics['total_punctuation'] / statistics['total_characters_with_spaces']) * 100
+    else:
+        percentage_letters = 0
+        percentage_digits = 0
+        percentage_spaces = 0
+        percentage_punctuation = 0
+
+    print(f'\tLetters: {statistics["total_letters"]}, {percentage_letters:.2f}%')
+    print(f'\tDigits: {statistics["total_digits"]}, {percentage_digits:.2f}%')
+    print(f'\tSpaces: {statistics["total_spaces"]}, {percentage_spaces:.2f}%')
+    print(f'\tPunctuation: {statistics["total_punctuation"]}, {percentage_punctuation:.2f}%')
 
     print('\nMost common letters:')
-    for i, key in enumerate(statistics['letter_frequency_distribution']):
-        # TODO: Again, I can't count. Add the percentage in here pleaseeee
-        print(f'{i + 1:<3} - "{key}": {statistics['letter_frequency_distribution'][key]} (0%)')
+    # for i, key in enumerate(statistics['letter_frequency_distribution']):
+    #     # TODO: I can't count. Add the percentage in here pleaseeee
+    #     print(f'{i + 1:<3} - "{key}": {statistics['letter_frequency_distribution'][key]} (0%)')
 
     print('Generating character analysis visualisation...')
     # TODO: generate Matplotlib visualization
