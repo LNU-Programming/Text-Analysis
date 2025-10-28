@@ -3,6 +3,16 @@ import time
 import display
 import export
 
+# Color codes
+RED = '\033[91m'
+GREEN = '\033[92m'
+YELLOW = '\033[93m'
+BLUE = '\033[94m'
+MAGENTA = '\033[95m'
+CYAN = '\033[96m'
+WHITE = '\033[97m'
+RESET = '\033[0m'  # Reset to default color
+BOLD = '\033[1m'
 
 def main():
     flag = True
@@ -30,37 +40,43 @@ def main():
 
         match choice:
             case "1":
+                print()
                 statistics = load.load_file()
             case "2":
+                print()
                 if statistics['filename'] == '':
-                    print('You need to load a file first!')
+                    print(f'{RED}You need to load a file first!{RESET}')
                     continue
                 display.basic_statistics(statistics)
             case "3":
+                print()
                 if statistics['filename'] == '':
-                    print('You need to load a file first!')
+                    print(f'{RED}You need to load a file first!{RESET}')
                     continue
                 display.word_analysis(statistics)
             case "4":
+                print()
                 if statistics['filename'] == '':
-                    print('You need to load a file first!')
+                    print(f'{RED}You need to load a file first!{RESET}')
                     continue
                 display.sentence_analysis(statistics)
             case "5":
+                print()
                 if statistics['filename'] == '':
-                    print('You need to load a file first!')
+                    print(f'{RED}You need to load a file first!{RESET}')
                     continue
                 display.character_analysis(statistics)
             case "6":
+                print()
                 if statistics['filename'] == '':
-                    print('You need to load a file first!')
+                    print(f'{RED}You need to load a file first!{RESET}')
                     continue
                 export.export_results(statistics)
             case "0":
                 print("Exiting the program...")
                 flag = False
             case _:
-                print("\n\tInvalid choice! Please select a number between 0 and 6.")
+                print(f"\n\t{RED}Invalid choice! Please select a number between 0 and 6.{RESET}")
                 time.sleep(3)
                 # TODO: Add a punishment when the user enters an invalid choices multiple times. Depending how many char
                 #  the user inputs.

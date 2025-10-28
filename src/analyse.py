@@ -107,8 +107,8 @@ def finalize_current_word(statistics: dict, analysis_data: dict) -> None:
 
         analysis_data["unique_words"].add(current_word) # unique_words is a set
 
-        # analysis_data["word_lengths"].append(len(current_word)) # TODO: I think it's wrong? What does this even do?
-                                                                # Shouldn't we add it to word_length_distribution?
+        # analysis_data["word_lengths"].append(len(current_word)) # TODO: I think it's wrong? What does this even do? Why is it here?
+                                                                  # Shouldn't we add it to word_length_distribution? We are doing it in line 118 wtf
         # Update word frequency
         if current_word in analysis_data["all_words"]: # all_words is a dict
             analysis_data["all_words"][current_word] += 1
@@ -169,7 +169,6 @@ def most_common_words(all_words: dict) -> dict:
         all_words.pop(max_val)
 
     return top_words
-
 
 
 def list_true_length(word_len_lst: list) -> int:
