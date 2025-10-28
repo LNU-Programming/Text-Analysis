@@ -15,8 +15,7 @@ PARAGRAPH_ENDERS = {"\n\n"}
 WORD_BOUNDARIES = {" ", "\t", "\n", ",", ";", ":"}
 TOP_WORDS_COUNT = 10
 
-# TODO: for newlines, couldn't we just check 'if line is just a newline, it's paragrah?
-
+# TODO: for paragraphs, couldn't we just check 'if line is just a newline, it's paragraph?
 
 def analyse_file(path: str, filename: str) -> dict[str, any]:
     statistics = initialize_statistics(filename)
@@ -149,30 +148,21 @@ def finalize_remaining_data(statistics: dict, analysis_data: dict) -> None:
 
     # Finalize the current sentence if it exists, it might not be ending with punctuation
     if analysis_data["current_sentence"]:
-        statistics["sentence_length_distribution"] = add_sentence_length_distribution(
-            statistics["sentence_length_distribution"],
-            analysis_data["current_sentence"],
-        )
+        statistics["sentence_length_distribution"] = add_sentence_length_distribution(statistics["sentence_length_distribution"], analysis_data["current_sentence"])
 
         statistics["total_sentences"] += 1
 
 
 def calculate_final_statistics(statistics: dict, analysis_data: dict) -> None:
     if statistics["total_lines"] > 0:
-        statistics["avg_words_per_line"] = (
-            statistics["total_words"] / statistics["total_lines"]
-        )
+        statistics["avg_words_per_line"] = (statistics["total_words"] / statistics["total_lines"])
 
     if statistics["total_words"] > 0:
-        statistics["avg_word_length"] = (
-            statistics["total_characters_without_spaces"] / statistics["total_words"]
-        )
+        statistics["avg_word_length"] = (statistics["total_characters_without_spaces"] / statistics["total_words"])
 
     statistics["ten_most_common_words"] = most_common_words(analysis_data["all_words"])
 
-    statistics["avg_word_length"] = sum(
-        analysis_data["word_lengths"]
-    ) / list_true_length(analysis_data["word_lengths"])
+    statistics["avg_word_length"] = sum(analysis_data["word_lengths"]) / list_true_length(analysis_data["word_lengths"])
 
     statistics["word_length_distribution"] = remove_trailing_zeros(
         analysis_data["word_lengths"]
@@ -180,13 +170,9 @@ def calculate_final_statistics(statistics: dict, analysis_data: dict) -> None:
 
     statistics["unique_word_count"] = len(analysis_data["unique_words"])
 
-    statistics["words_appearing_once"] = word_appearing_only_once(
-        analysis_data["all_words"]
-    )
+    statistics["words_appearing_once"] = word_appearing_only_once(analysis_data["all_words"])
 
-    statistics["average_words_per_sentence"] = (
-        statistics["total_words"] / statistics["total_sentences"]
-    )
+    statistics["average_words_per_sentence"] = (statistics["total_words"] / statistics["total_sentences"])
 
 
 def most_common_words(all_words: dict) -> dict:
@@ -243,7 +229,9 @@ def length_in_words(sentence: str) -> int:
 
 def add_sentence_length_distribution(sentence_length_distribution: list, current_sentence: str) -> list:
     if len(sentence_length_distribution) < length_in_words(current_sentence):
-        sentence_length_distribution.extend([0 for _ in range(len(sentence_length_distribution), length_in_words(current_sentence))])  # TODO: needs doublechecking
+        # The list is extended by as many spaces as the difference between the current sentence and the distribution list
+        difference = length_in_words(current_sentence) - len(sentence_length_distribution)
+        sentence_length_distribution.extend([0 for _ in range(difference)])
         sentence_length_distribution[length_in_words(current_sentence) - 1] = 1
     else:
         sentence_length_distribution[length_in_words(current_sentence) - 1] += 1
