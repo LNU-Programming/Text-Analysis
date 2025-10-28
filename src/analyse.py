@@ -115,32 +115,40 @@ def process_character(char: str, statistics: dict, analysis_data: dict) -> None:
 
     if char in PUNCTUATION:
         statistics['total_punctuation'] += 1
-        # Add punctuation to distribution
-        # TODO: turn into a function
-        if char.lower() in statistics["punctuation_distribution"]:
-            statistics["punctuation_distribution"][char.lower()] += 1
-        else:
-            statistics["punctuation_distribution"][char.lower()] = 1
+        add_to_punctuation_distribution(char, statistics)
 
     # Check if we are at the end of a word
     if char.isalpha():
         analysis_data["current_word"] += char.lower()
 
-        if char.isupper():
-            statistics['case_distribution'][1] += 1
-        else:
-            statistics["case_distribution"][0] += 1
+        add_to_case_distribution(char, statistics)
 
-        # Add letter to distribution
-        # TODO: turn into a function
-        if char.lower() in statistics["letter_frequency_distribution"]:
-            statistics["letter_frequency_distribution"][char.lower()] += 1
-        else:
-            statistics["letter_frequency_distribution"][char.lower()] = 1
+        add_to_letter_frequency_distribution(char, statistics)
 
         statistics['total_letters'] += 1
     else:
         finalize_current_word(statistics, analysis_data)
+
+
+def add_to_case_distribution(char, statistics):
+    if char.isupper():
+        statistics['case_distribution'][1] += 1
+    else:
+        statistics["case_distribution"][0] += 1
+
+
+def add_to_letter_frequency_distribution(char, statistics):
+    if char.lower() in statistics["letter_frequency_distribution"]:
+        statistics["letter_frequency_distribution"][char.lower()] += 1
+    else:
+        statistics["letter_frequency_distribution"][char.lower()] = 1
+
+
+def add_to_punctuation_distribution(char, statistics):
+    if char.lower() in statistics["punctuation_distribution"]:
+        statistics["punctuation_distribution"][char.lower()] += 1
+    else:
+        statistics["punctuation_distribution"][char.lower()] = 1
 
 
 def finalize_current_word(statistics: dict, analysis_data: dict) -> None:
