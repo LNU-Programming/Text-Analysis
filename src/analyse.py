@@ -9,7 +9,7 @@ WHITE = '\033[97m'
 RESET = '\033[0m'  # Reset to default color
 BOLD = '\033[1m'
 
-SENTENCE_ENDERS = {".", "!", "?", ":"}
+SENTENCE_ENDERS = {".", "!", "?"}
 SENTENCE_EXCEPTIONS = ['dr.', 'mr.', 'mrs.', 'ms.']
 PARAGRAPH_ENDERS = {"\n\n"}
 WORD_BOUNDARIES = {" ", "\t", "\n", ",", ";", ":"}
@@ -42,24 +42,24 @@ def initialize_statistics(filename: str) -> dict[str, any]:
         # ==== Basic statistics ====
         "total_lines": 0,                       # Ok
         "total_paragraphs": 0,                  # TODO
-        "total_sentences": 0,                   # TODO: fix, number is way off
+        "total_sentences": 0,                   # FIX: number is way off
         "total_words": 0,                       # Ok
         "total_characters_with_spaces": 0,      # Ok
         "total_characters_without_spaces": 0,   # Ok
         "avg_words_per_line": 0.0,
         # ==== Word analysis ====
-        "ten_most_common_words": {},
-        "shortest_word": "aaaaaaaaa",
-        "longest_word": "",
-        "avg_word_length": 0.0,
+        "ten_most_common_words": {},            # Ok
+        "shortest_word": "aaaaaaaaa",           # Ok
+        "longest_word": "",                     # Ok
+        "avg_word_length": 0.0,                 # FIX: number way off
         "word_length_distribution": [],
-        "unique_word_count": 0,
-        "words_appearing_once": 0,
+        "unique_word_count": 0,                 # Seems ok, double check
+        "words_appearing_once": 0,              # Seems ok, double check
         # ==== Sentence analysis ====
         "average_words_per_sentence": 0.0,      # TODO: fix, number is way off
-        "longest_sentence": "",
-        "shortest_sentence": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-        "sentence_length_distribution": [],
+        "longest_sentence": "",                 # FIX: not working
+        "shortest_sentence": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", # FIX: not working
+        "sentence_length_distribution": [],     # FIX: not working
         # ==== Character analysis ====
         "total_letters": 0,  # TODO
         "total_digits": 0,  # TODO
