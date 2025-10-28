@@ -25,19 +25,12 @@ def load_file() -> dict[str, any]:
         return {"filename": ""}
 
     try:
-        choice = input(
-            "Enter a number from the list above, or write the name of the file."
-        )
+        choice = int(input("Enter a number from the list above, or write the name of the file: "))
+        selected_files = os.listdir(path)
 
-        # TODO: add possibility to type filename aswell
-
-        selected_files = os.listdir("../data/")
         if 0 < int(choice) <= len(selected_files):
-            print(f"\nAnalyzing {selected_files[int(choice) - 1]}...")
-            return analyse.analyse_file(path, selected_files[int(choice) - 1])
-        elif choice in selected_files:
-            print(f"\nAnalyzing {choice}...")
-            return analyse.analyse_file(path, choice)
+            print(f"\nAnalyzing {selected_files[choice - 1]}...")
+            return analyse.analyse_file(path, selected_files[choice - 1])
         print(f"{RED}Please enter a number between 1 and {len(selected_files)}{RESET}")
         return load_file()
 
