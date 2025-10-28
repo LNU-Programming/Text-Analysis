@@ -89,9 +89,9 @@ def character_analysis(statistics) -> None:
     print(f'\tPunctuation: {statistics["total_punctuation"]}, {percentage_punctuation:.2f}%')
 
     print('\nMost common letters:')
-    # for i, key in enumerate(statistics['letter_frequency_distribution']):
-    #     # TODO: I can't count. Add the percentage in here pleaseeee
-    #     print(f'{i + 1:<3} - "{key}": {statistics['letter_frequency_distribution'][key]} (0%)')
+    for i, key in enumerate(statistics['letter_frequency_distribution']):
+        percentage = (statistics['letter_frequency_distribution'][key] / statistics['total_characters_with_spaces']) * 100
+        print(f'{i + 1:<2} - "{key}" : {statistics['letter_frequency_distribution'][key]:<8} ({percentage:.2f}%)')
 
     print('Generating character analysis visualisation...')
     # TODO: generate Matplotlib visualization
