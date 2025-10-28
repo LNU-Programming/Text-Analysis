@@ -228,12 +228,13 @@ def length_in_words(sentence: str) -> int:
 
 
 def add_sentence_length_distribution(sentence_length_distribution: list, current_sentence: str) -> list:
-    if len(sentence_length_distribution) < length_in_words(current_sentence):
-        # The list is extended by as many spaces as the difference between the current sentence and the distribution list
-        difference = length_in_words(current_sentence) - len(sentence_length_distribution)
-        sentence_length_distribution.extend([0 for _ in range(difference)])
-        sentence_length_distribution[length_in_words(current_sentence) - 1] = 1
-    else:
-        sentence_length_distribution[length_in_words(current_sentence) - 1] += 1
+    if length_in_words(current_sentence) > 0:
+        if len(sentence_length_distribution) < length_in_words(current_sentence):
+            # The list is extended by as many spaces as the difference between the current sentence and the distribution list
+            difference = length_in_words(current_sentence) - len(sentence_length_distribution)
+            sentence_length_distribution.extend([0 for _ in range(difference)])
+            sentence_length_distribution[length_in_words(current_sentence) - 1] = 1
+        else:
+            sentence_length_distribution[length_in_words(current_sentence) - 1] += 1
 
     return sentence_length_distribution
