@@ -60,7 +60,7 @@ def initialize_statistics(filename: str) -> dict[str, any]:
         # ==== Sentence analysis ====
         "average_words_per_sentence": 0.0,  # TODO: fix, number is way off
         "longest_sentence": "",  # FIX: not working
-        "shortest_sentence": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",  # FIX: not working
+        "shortest_sentence": "aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa",  # FIX: not working
         "sentence_length_distribution": [],  # FIX: not working
         # ==== Character analysis ====
         "total_letters": 0,  # TODO

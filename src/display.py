@@ -1,3 +1,6 @@
+import analyse
+
+
 def basic_statistics(statistics: dict) -> None:
     print(f'--- Basic Statistics for "{statistics["filename"]}" ---')
     print(f"Lines: {statistics['total_lines']}")
@@ -47,8 +50,8 @@ def sentence_analysis(statistics) -> None:
     print(f'\n--- Sentence Analysis for "{statistics["filename"]}" ---')
     print(f"Total sentences: {statistics['total_sentences']}")
     print(f"Average words per sentence: {statistics['average_words_per_sentence']:.2f}")
-    print(f"Shortest sentence: {len(statistics['shortest_sentence'])}")
-    print(f"Longest sentence: {len(statistics['longest_sentence'])}")
+    print(f"Shortest sentence: {analyse.length_in_words(statistics['shortest_sentence'])}")
+    print(f"Longest sentence: {analyse.length_in_words(statistics['longest_sentence'])}")
 
     print(f"Shortest sentence text: {statistics['shortest_sentence']}")
     print(f"Longest sentence text: {statistics['longest_sentence']}")
