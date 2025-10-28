@@ -9,7 +9,7 @@ WHITE = "\033[97m"
 RESET = "\033[0m"  # Reset to default color
 BOLD = "\033[1m"
 
-SENTENCE_ENDERS = {".", "!", "?"}
+SENTENCE_ENDERS = (".", "!", "?", ':--')
 SENTENCE_EXCEPTIONS = ["dr.", "mr.", "mrs.", "ms."]
 PARAGRAPH_ENDERS = {"\n\n"}
 WORD_BOUNDARIES = {" ", "\t", "\n", ",", ";", ":"}
@@ -100,7 +100,7 @@ def process_character(char: str, statistics: dict, analysis_data: dict) -> None:
         statistics["sentence_length_distribution"] = add_sentence_length_distribution(statistics["sentence_length_distribution"], analysis_data["current_sentence"])
 
         statistics["longest_sentence"] = (analysis_data["current_sentence"] if length_in_words(analysis_data["current_sentence"]) > length_in_words(statistics["longest_sentence"]) else statistics["longest_sentence"])
-        statistics["shortest_sentence"] = (analysis_data["current_sentence"] if length_in_words(analysis_data["current_sentence"]) < length_in_words(statistics["shortest_sentence"]) else statistics["shortest_sentence"])
+        statistics["shortest_sentence"] = (analysis_data["current_sentence"] if length_in_words(analysis_data["current_sentence"]) < length_in_words(statistics["shortest_sentence"]) and (length_in_words(analysis_data['current_sentence']) > 2) else statistics["shortest_sentence"])
 
         statistics["total_sentences"] += 1
 
