@@ -99,8 +99,8 @@ def process_character(char: str, statistics: dict, analysis_data: dict) -> None:
     if char in SENTENCE_ENDERS:
         statistics["sentence_length_distribution"] = add_sentence_length_distribution(statistics["sentence_length_distribution"], analysis_data["current_sentence"])
 
-        statistics["longest_sentence"] = (analysis_data["current_sentence"] if length_in_words(analysis_data["current_sentence"]) > length_in_words(statistics["longest_sentence"]) else statistics["longest_sentence"])
-        statistics["shortest_sentence"] = (analysis_data["current_sentence"] if length_in_words(analysis_data["current_sentence"]) < length_in_words(statistics["shortest_sentence"]) and (length_in_words(analysis_data['current_sentence']) > 2) else statistics["shortest_sentence"])
+        statistics["longest_sentence"] = (analysis_data["current_sentence"].strip() if length_in_words(analysis_data["current_sentence"]) > length_in_words(statistics["longest_sentence"]) else statistics["longest_sentence"])
+        statistics["shortest_sentence"] = (analysis_data["current_sentence"].strip() if length_in_words(analysis_data["current_sentence"]) < length_in_words(statistics["shortest_sentence"]) and (length_in_words(analysis_data['current_sentence']) > 2) else statistics["shortest_sentence"])
 
         statistics["total_sentences"] += 1
 
