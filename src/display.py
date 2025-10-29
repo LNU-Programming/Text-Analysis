@@ -1,5 +1,5 @@
 import analyse
-
+import graph
 
 def basic_statistics(statistics: dict) -> None:
     print(f'--- Basic Statistics for "{statistics["filename"]}" ---')
@@ -17,6 +17,9 @@ def basic_statistics(statistics: dict) -> None:
 
     print("\nGenerating basic statistics visualization...")
     # TODO: generate Matplotlib visualization
+
+    graph.text_composition_graph(statistics)
+
     print("Press ENTER to continue...")
     return None
 
