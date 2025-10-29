@@ -19,7 +19,6 @@ def analyse_file(path: str, filename: str) -> dict[str, any]:
             for line in file:
                 process_line(line, statistics, analysis_data)
 
-                # According to all the paragraph counting websites this is how paragraphs are counted.
                 if line.strip():
                     statistics['total_paragraphs'] += 1
 
@@ -28,9 +27,7 @@ def analyse_file(path: str, filename: str) -> dict[str, any]:
     except FileNotFoundError:
         print("File not found.")
 
-    print(
-        f"{GREEN}Analysis complete! Processed {statistics['total_lines']} lines.{RESET}"
-    )
+    print(f"{GREEN}Analysis complete! Processed {statistics['total_lines']} lines.{RESET}")
     print(f'{GREEN}Successfully loaded and analyzed "{statistics["filename"]}"{RESET}')
     return statistics
 
@@ -50,7 +47,7 @@ def initialize_statistics(filename: str) -> dict[str, any]:
         "ten_most_common_words": {},  # Ok
         "shortest_word": "aaaaaaaaa",  # Ok
         "longest_word": "",  # Ok
-        "avg_word_length": 0.0,  # TODO: number way off
+        "avg_word_length": 0.0,  # Ok
         "word_length_distribution": [],
         "unique_word_count": 0,  # Ok
         "words_appearing_once": 0,  # Ok
@@ -84,7 +81,6 @@ def initialize_analysis_data() -> dict[str, any]:
 
 def process_line(line: str, statistics: dict, analysis_data: dict) -> None:
     statistics["total_lines"] += 1
-
     for char in line:
         process_character(char, statistics, analysis_data)
 
@@ -127,21 +123,21 @@ def process_character(char: str, statistics: dict, analysis_data: dict) -> None:
         finalize_current_word(statistics, analysis_data)
 
 
-def add_to_case_distribution(char, statistics):
+def add_to_case_distribution(char: str, statistics: dict):
     if char.isupper():
         statistics['case_distribution'][1] += 1
     else:
         statistics["case_distribution"][0] += 1
 
 
-def add_to_letter_frequency_distribution(char, statistics):
+def add_to_letter_frequency_distribution(char: str, statistics: dict) -> None:
     if char.lower() in statistics["letter_frequency_distribution"]:
         statistics["letter_frequency_distribution"][char.lower()] += 1
     else:
         statistics["letter_frequency_distribution"][char.lower()] = 1
 
 
-def add_to_punctuation_distribution(char, statistics):
+def add_to_punctuation_distribution(char: str, statistics: dict) -> None:
     if char.lower() in statistics["punctuation_distribution"]:
         statistics["punctuation_distribution"][char.lower()] += 1
     else:
@@ -153,19 +149,14 @@ def finalize_current_word(statistics: dict, analysis_data: dict) -> None:
 
     if current_word:
         statistics["total_words"] += 1
-
         analysis_data["unique_words"].add(current_word)  # unique_words is a set
 
-        # analysis_data["word_lengths"].append(len(current_word)) # TODO: I think it's wrong? What does this even do? Why is it here?
-        # Shouldn't we add it to word_length_distribution? We are doing it in line 118 wtf
-        # Update word frequency
         if current_word in analysis_data["all_words"]:  # all_words is a dict
             analysis_data["all_words"][current_word] += 1
         else:
             analysis_data["all_words"][current_word] = 1
 
         statistics["total_characters_without_spaces"] += len(current_word)
-
         analysis_data["word_lengths"][len(current_word) - 1] += 1
 
         if len(statistics["shortest_word"]) > len(current_word):
