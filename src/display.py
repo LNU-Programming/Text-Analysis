@@ -8,9 +8,7 @@ def basic_statistics(statistics: dict) -> None:
     print(f"Sentences: {statistics['total_sentences']}")
     print(f"Words: {statistics['total_words']}")
     print(f"Characters (with spaces): {statistics['total_characters_with_spaces']}")
-    print(
-        f"Characters (without spaces): {statistics['total_characters_without_spaces']}"
-    )
+    print(f"Characters (without spaces): {statistics['total_characters_without_spaces']}")
     print(f"Average words per line: {statistics['avg_words_per_line']:.2f}")
     print(f"Average words per sentence: {statistics['average_words_per_sentence']:.2f}")
     print(f"Average word length: {statistics['avg_word_length']:.2f}")
@@ -28,17 +26,11 @@ def word_analysis(statistics) -> None:
     print(f'--- Word Analysis for "{statistics["filename"]}" ---')
     print("Top 10 most common words:")
     for i, word in enumerate(statistics["ten_most_common_words"]):
-        print(
-            f"{i + 1:<3}- {word:<8}{statistics['ten_most_common_words'][word]:<8} times ({statistics['ten_most_common_words'][word] / statistics['total_words'] * 100:.2f} %)"
-        )
+        print(f"{i + 1:<3}- {word:<8}{statistics['ten_most_common_words'][word]:<8} times ({statistics['ten_most_common_words'][word] / statistics['total_words'] * 100:.2f} %)")
 
     print("\nWord length statistics:")
-    print(
-        f"\tShortest word: {statistics['shortest_word']}, {len(statistics['shortest_word'])} characters"
-    )
-    print(
-        f"\tLongest word: {statistics['longest_word']}, {len(statistics['longest_word'])} characters"
-    )
+    print(f"\tShortest word: {statistics['shortest_word']}, {len(statistics['shortest_word'])} characters")
+    print(f"\tLongest word: {statistics['longest_word']}, {len(statistics['longest_word'])} characters")
     print(f"\tAverage word length: {statistics['avg_word_length']:.2f} characters")
     print(f"Unique word count: {statistics['unique_word_count']}")
     print(f"Words appearing only once: {statistics['words_appearing_once']}")
@@ -63,9 +55,6 @@ def sentence_analysis(statistics) -> None:
     print(f"Longest sentence text: {statistics['longest_sentence']}")
 
     print("\nSentence length distribution:")
-    # for i, element in enumerate(statistics["sentence_length_distribution"]):
-    #     print(f"{i + 1:<3} words: {element:<8} sentences ({element / statistics['total_sentences'] * 100:.2f} %)")
-
     copy_of_distribution = statistics["sentence_length_distribution"]
     for i in range(5):
         print(f'{i + 1:<3} words: {max(copy_of_distribution):<4} sentences ({max(copy_of_distribution) / statistics['total_sentences'] * 100:.2f} %)')
