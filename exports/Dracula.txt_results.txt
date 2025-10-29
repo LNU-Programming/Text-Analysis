@@ -14,7 +14,7 @@ Unique words: 9226
 Characters (with spaces): 842184
 Characters (without spaces): 640872
 Average words per line: 10.63
-Average word length: 9579.00
+Average word length: 3.94
 Average words per sentence: 17.14
 
 
@@ -36,11 +36,12 @@ TOP 10 MOST COMMON WORDS
 8  - in      2503     times (1.54 %)
 9  - that    2486     times (1.53 %)
 10 - it      2169     times (1.33 %)
+
 SENTENCE STATISTICS
 -------------------------
 Total sentences: 9499
-Shortest sentence: 24
-Longest sentence: 774
+Shortest sentence: 3
+Longest sentence: 155
 Shortest sentence text: “Your friend,
 
 “DRACULA.
