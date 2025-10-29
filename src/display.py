@@ -63,10 +63,13 @@ def sentence_analysis(statistics) -> None:
     print(f"Longest sentence text: {statistics['longest_sentence']}")
 
     print("\nSentence length distribution:")
-    for i, element in enumerate(statistics["sentence_length_distribution"]):
-        print(
-            f"{i + 1:<3} words: {element:<8} sentences ({element / statistics['total_sentences'] * 100:.2f} %)"
-        )
+    # for i, element in enumerate(statistics["sentence_length_distribution"]):
+    #     print(f"{i + 1:<3} words: {element:<8} sentences ({element / statistics['total_sentences'] * 100:.2f} %)")
+
+    copy_of_distribution = statistics["sentence_length_distribution"]
+    for i in range(5):
+        print(f'{i + 1:<3} words: {max(copy_of_distribution):<4} sentences ({max(copy_of_distribution) / statistics['total_sentences'] * 100:.2f} %)')
+        copy_of_distribution.remove(max(copy_of_distribution))
 
     print("Generating sentence analysis visualisation...")
     graph.sentence_length_distribution_graph(statistics)
