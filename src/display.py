@@ -69,7 +69,8 @@ def sentence_analysis(statistics) -> None:
         )
 
     print("Generating sentence analysis visualisation...")
-
+    graph.sentence_length_distribution_graph(statistics)
+    # TODO: Most common sentence length
     print("Press Enter to continue...")
 
     return None
@@ -110,8 +111,8 @@ def character_analysis(statistics) -> None:
     print(f'\tUpper characters: {statistics['case_distribution'][1]}')
 
     print('Generating character analysis visualisation...')
-    # TODO: generate Matplotlib visualization
-
+    graph.ten_most_common_letters_graph(statistics)
+    graph.character_type_distribution(statistics)
     print('Press ENTER to continue...')
 
     return None

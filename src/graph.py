@@ -33,3 +33,19 @@ def word_length_distribution_graph(stats):
 
     plt.bar(lengths, counts)
     plt.show()
+
+
+def sentence_length_distribution_graph(stats):
+    lengths = list(range(1, len(stats['sentence_length_distribution']) + 1))
+    counts = stats['sentence_length_distribution']
+
+    plt.bar(lengths, counts)
+    plt.show()
+
+
+def ten_most_common_letters_graph(stats):
+    letters = list(stats['ten_most_common_letters'].keys())
+    counts = list(stats['ten_most_common_letters'].values())
+
+    plt.bar(letters, counts)
+    plt.show()
