@@ -70,7 +70,7 @@ def sentence_analysis(statistics) -> None:
 
     print("Generating sentence analysis visualisation...")
     graph.sentence_length_distribution_graph(statistics)
-    # TODO: Most common sentence length
+    graph.most_common_sentence_length(statistics)
     print("Press Enter to continue...")
 
     return None

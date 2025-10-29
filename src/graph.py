@@ -43,6 +43,22 @@ def sentence_length_distribution_graph(stats):
     plt.show()
 
 
+def most_common_sentence_length(stats):
+    distribution = stats['sentence_length_distribution']
+
+    # Create pairs of (length, count) and sort by count descending
+    pairs = [(i + 1, count) for i, count in enumerate(distribution)]
+    pairs.sort(key=lambda x: x[1], reverse=True)
+
+    # Take top 8
+    top_8 = pairs[:8]
+
+    lengths = [pair[0] for pair in top_8]
+    counts = [pair[1] for pair in top_8]
+
+    plt.bar(lengths, counts)
+    plt.show()
+
 def ten_most_common_letters_graph(stats):
     letters = list(stats['ten_most_common_letters'].keys())
     counts = list(stats['ten_most_common_letters'].values())
