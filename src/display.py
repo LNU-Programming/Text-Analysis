@@ -18,7 +18,7 @@ def basic_statistics(statistics: dict) -> None:
     print("\nGenerating basic statistics visualization...")
     # TODO: generate Matplotlib visualization
 
-    graph.text_composition_graph(statistics)
+    graph.text_composition(statistics)
 
     print("Press ENTER to continue...")
     return None
@@ -108,6 +108,9 @@ def character_analysis(statistics) -> None:
 
     print('Generating character analysis visualisation...')
     # TODO: generate Matplotlib visualization
+
+    graph.character_type_distribution(statistics)
+
     print('Press ENTER to continue...')
 
     return None
