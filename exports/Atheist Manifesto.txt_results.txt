@@ -6,3 +6,33 @@ Analysis date: 2025-10-29
 
 BASIC STATISTICS
 --------------------
+Lines: 1091
+Paragraphs: 0
+Sentences: 415
+Words: 8059
+Unique words: 1793
+Characters (with spaces): 45367
+Characters (without spaces): 35837
+Average words per line: 7.39
+Average word length: 537.27
+Average words per sentence: 19.42
+
+TOP 10 MOST COMMON WORDS
+------------------------------
+1  - the     629      times (7.80 %)
+2  - of      447      times (5.55 %)
+3  - and     328      times (4.07 %)
+4  - to      210      times (2.61 %)
+5  - is      172      times (2.13 %)
+6  - a       163      times (2.02 %)
+7  - that    141      times (1.75 %)
+8  - as      115      times (1.43 %)
+9  - it      108      times (1.34 %)
+10 - in      108      times (1.34 %)
+
+WORD STATISTICS
+--------------------
+Shortest word: a
+Longest word: accomplishments
+Words appearing only once: 1097
+
