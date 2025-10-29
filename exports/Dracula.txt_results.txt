@@ -1,0 +1,83 @@
+============================================================
+	TEXT ANALYSIS RESULTS
+============================================================
+File analysed: Dracula.txt
+Analysis date: 2025-10-29
+
+BASIC STATISTICS
+--------------------
+Lines: 15326
+Paragraphs: 0
+Sentences: 9499
+Words: 162843
+Unique words: 9226
+Characters (with spaces): 842184
+Characters (without spaces): 640872
+Average words per line: 10.63
+Average word length: 9579.00
+Average words per sentence: 17.14
+
+TOP 10 MOST COMMON WORDS
+------------------------------
+1  - the     7881     times (4.84 %)
+2  - and     5904     times (3.63 %)
+3  - i       4843     times (2.97 %)
+4  - to      4658     times (2.86 %)
+5  - of      3612     times (2.22 %)
+6  - a       2949     times (1.81 %)
+7  - he      2580     times (1.58 %)
+8  - in      2503     times (1.54 %)
+9  - that    2486     times (1.53 %)
+10 - it      2169     times (1.33 %)
+
+WORD STATISTICS
+--------------------
+Shortest word: i
+Longest word: straightforwardly
+Words appearing only once: 4194
+
+SENTENCE STATISTICS
+-------------------------
+Total sentences: 9499
+Shortest sentence: 24
+Longest sentence: 774
+Shortest sentence text: “Your friend,
+
+“DRACULA.
+Longest sentence text: This vampire which is
+amongst us is of himself so strong in person as twenty men; he is of
+cunning more than mortal, for his cunning be the growth of ages; he have
+still the aids of necromancy, which is, as his etymology imply, the
+divination by the dead, and all the dead that he can come nigh to are
+for him at command; he is brute, and more than brute; he is devil in
+callous, and the heart of him is not; he can, within limitations, appear
+at will when, and where, and in any of the forms that are to him; he
+can, within his range, direct the elements; the storm, the fog, the
+thunder; he can command all the meaner things: the rat, and the owl, and
+the bat--the moth, and the fox, and the wolf; he can grow and become
+small; and he can at times vanish and come unknown.
+
+CHARACTER STATISTICS
+-------------------------
+Letters: 640872
+Digits: 452
+Spaces: 167741
+Punctuation: 28576
+
+TOP 10 MOST COMMON LETTERS
+------------------------------
+1  - e       79619    times (9.45 %)
+2  - t       58400    times (6.93 %)
+3  - a       52544    times (6.24 %)
+4  - o       50526    times (6.00 %)
+5  - n       43786    times (5.20 %)
+6  - h       43430    times (5.16 %)
+7  - i       42823    times (5.08 %)
+8  - s       39695    times (4.71 %)
+9  - r       35105    times (4.17 %)
+10 - d       28625    times (3.40 %)
+
+============================================================
+End of Analysis Report
+============================================================
+

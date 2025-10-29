@@ -1,13 +1,7 @@
 # Color codes
 RED = "\033[91m"
 GREEN = "\033[92m"
-YELLOW = "\033[93m"
-BLUE = "\033[94m"
-MAGENTA = "\033[95m"
-CYAN = "\033[96m"
-WHITE = "\033[97m"
 RESET = "\033[0m"  # Reset to default color
-BOLD = "\033[1m"
 
 SENTENCE_ENDERS = (".", "!", "?", ':--')
 SENTENCE_EXCEPTIONS = ["dr.", "mr.", "mrs.", "ms."]
@@ -71,6 +65,7 @@ def initialize_statistics(filename: str) -> dict[str, any]:
         "letter_frequency_distribution": {},  # Ok
         "punctuation_distribution": {},  # Ok
         "case_distribution": [0, 0],  # Ok
+        "ten_most_common_letters": {}
     }
 
 
@@ -199,6 +194,7 @@ def calculate_final_statistics(statistics: dict, analysis_data: dict) -> None:
         statistics["avg_word_length"] = (statistics["total_characters_without_spaces"] / statistics["total_words"])
 
     statistics["ten_most_common_words"] = most_common_words(analysis_data["all_words"])
+    statistics['ten_most_common_letters'] = most_common_words(statistics['letter_frequency_distribution'])
 
     statistics["avg_word_length"] = sum(analysis_data["word_lengths"]) / list_true_length(analysis_data["word_lengths"])
 

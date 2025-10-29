@@ -1,6 +1,12 @@
 from datetime import datetime
 
+
 PATH = '../exports/'
+# Color codes
+RED = "\033[91m"
+GREEN = "\033[92m"
+RESET = "\033[0m"  # Reset to default color
+
 
 def export_to_txt(statistics: dict):
     export_name = statistics['filename'] + '_results.txt'
@@ -54,17 +60,18 @@ def export_to_txt(statistics: dict):
             file.write(f'Punctuation: {statistics["total_punctuation"]}\n\n')
 
             file.write('TOP 10 MOST COMMON LETTERS\n')
-            file.write('------------------------------\n\n')
-            #TODO: add this one
+            file.write('------------------------------\n')
+            for i, letter in enumerate(statistics["ten_most_common_letters"]):
+                file.write(f"{i + 1:<3}- {letter:<8}{statistics['ten_most_common_letters'][letter]:<8} times ({statistics['ten_most_common_letters'][letter] / statistics['total_characters_with_spaces'] * 100:.2f} %)\n")
 
-            file.write('============================================================\n')
+            file.write('\n============================================================\n')
             file.write('End of Analysis Report\n')
             file.write('============================================================\n')
 
             file.write(f'\n')
 
-            print(f'Results exported to {PATH}{export_name}')
-            print('Results saved in simple text format - easy to read and understand!')
+            print(f'{GREEN}Results exported to {PATH}{export_name}')
+            print(f'Results saved in simple text format - easy to read and understand!{RESET}')
     except IOError:
-        print('There was an error writing to file!')
+        print(f'{RED}There was an error writing to file!{RESET}')
     return None
