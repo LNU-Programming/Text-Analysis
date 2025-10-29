@@ -71,7 +71,7 @@ def main():
                 if statistics['filename'] == '':
                     print(f'{RED}You need to load a file first!{RESET}')
                     continue
-                export.export_results(statistics)
+                export.export_to_txt(statistics)
             case "0":
                 print("Exiting the program...")
                 flag = False
