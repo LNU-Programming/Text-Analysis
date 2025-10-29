@@ -1,3 +1,5 @@
+from datetime import datetime
+
 PATH = '../exports/'
 
 def export_to_txt(statistics: dict):
@@ -8,9 +10,17 @@ def export_to_txt(statistics: dict):
 
     try:
         with open(PATH + export_name, 'w') as file:
-            file.write('Ciao mi chiamo fagiolo\n')
-            file.write('Ciaoissimooo\n')
-            file.write('Cia cia')
+            file.write('============================================================\n')
+            file.write('\tTEXT ANALYSIS RESULTS\n')
+            file.write('============================================================\n')
+
+            file.write(f'File analysed: {statistics['filename']}\n')
+            file.write(f'Analysis date: {datetime.now().strftime('%Y-%m-%d')}\n\n')
+
+            file.write('BASIC STATISTICS\n')
+            file.write('--------------------\n')
+
+
     except IOError:
         print('There was an error writing to file!')
     return None

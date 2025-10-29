@@ -1,2 +1,8 @@
-Ciao mi chiamo fagiolo
-CiaoissimoooCia cia
+============================================================
+	TEXT ANALYSIS RESULTS
+============================================================
+File analysed: Atheist Manifesto.txt
+Analysis date: 2025-10-29
+
+BASIC STATISTICS
+--------------------
