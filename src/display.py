@@ -16,9 +16,9 @@ def basic_statistics(statistics: dict) -> None:
     print(f"Average word length: {statistics['avg_word_length']:.2f}")
 
     print("\nGenerating basic statistics visualization...")
-    # TODO: generate Matplotlib visualization
 
     graph.text_composition(statistics)
+    graph.character_type_distribution(statistics)
 
     print("Press ENTER to continue...")
     return None
@@ -44,7 +44,10 @@ def word_analysis(statistics) -> None:
     print(f"Words appearing only once: {statistics['words_appearing_once']}")
 
     print("\nGenerating word analysis visualization...")
-    # TODO: generate Matplotlib visualization
+
+    graph.most_common_words_graph(statistics)
+    graph.word_length_distribution_graph(statistics)
+
     print("Press ENTER to continue...")
     return None
 
@@ -108,8 +111,6 @@ def character_analysis(statistics) -> None:
 
     print('Generating character analysis visualisation...')
     # TODO: generate Matplotlib visualization
-
-    graph.character_type_distribution(statistics)
 
     print('Press ENTER to continue...')
 
