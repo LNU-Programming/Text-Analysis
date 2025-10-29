@@ -193,12 +193,10 @@ def calculate_final_statistics(statistics: dict, analysis_data: dict) -> None:
         statistics["avg_words_per_line"] = (statistics["total_words"] / statistics["total_lines"])
 
     if statistics["total_words"] > 0:
-        statistics["avg_word_length"] = (statistics["total_characters_without_spaces"] / statistics["total_words"])
+        statistics["avg_word_length"] = statistics["total_characters_without_spaces"] / statistics["total_words"]
 
     statistics["ten_most_common_words"] = most_common_words(analysis_data["all_words"])
     statistics['ten_most_common_letters'] = most_common_words(statistics['letter_frequency_distribution'])
-
-    statistics["avg_word_length"] = sum(analysis_data["word_lengths"]) / list_true_length(analysis_data["word_lengths"])
 
     statistics["word_length_distribution"] = remove_trailing_zeros(
         analysis_data["word_lengths"]
