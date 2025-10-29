@@ -14,7 +14,6 @@ SENTENCE_EXCEPTIONS = ["dr.", "mr.", "mrs.", "ms."]
 WORD_BOUNDARIES = {" ", "\t", "\n", ",", ";", ":"}
 TOP_WORDS_COUNT = 10
 
-# TODO: for paragraphs, couldn't we just check 'if line is just a newline, it's paragraph?
 
 def analyse_file(path: str, filename: str) -> dict[str, any]:
     statistics = initialize_statistics(filename)
