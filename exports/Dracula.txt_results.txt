@@ -7,7 +7,7 @@ Analysis date: 2025-10-29
 BASIC STATISTICS
 --------------------
 Lines: 15326
-Paragraphs: 0
+Paragraphs: 12978
 Sentences: 9499
 Words: 162843
 Unique words: 9226
@@ -16,6 +16,13 @@ Characters (without spaces): 640872
 Average words per line: 10.63
 Average word length: 9579.00
 Average words per sentence: 17.14
+
+
+WORD STATISTICS
+--------------------
+Shortest word: i
+Longest word: straightforwardly
+Words appearing only once: 4194
 
 TOP 10 MOST COMMON WORDS
 ------------------------------
@@ -29,13 +36,6 @@ TOP 10 MOST COMMON WORDS
 8  - in      2503     times (1.54 %)
 9  - that    2486     times (1.53 %)
 10 - it      2169     times (1.33 %)
-
-WORD STATISTICS
---------------------
-Shortest word: i
-Longest word: straightforwardly
-Words appearing only once: 4194
-
 SENTENCE STATISTICS
 -------------------------
 Total sentences: 9499

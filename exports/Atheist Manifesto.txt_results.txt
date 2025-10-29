@@ -7,7 +7,7 @@ Analysis date: 2025-10-29
 BASIC STATISTICS
 --------------------
 Lines: 1091
-Paragraphs: 0
+Paragraphs: 775
 Sentences: 415
 Words: 8059
 Unique words: 1793
@@ -16,6 +16,13 @@ Characters (without spaces): 35837
 Average words per line: 7.39
 Average word length: 537.27
 Average words per sentence: 19.42
+
+
+WORD STATISTICS
+--------------------
+Shortest word: a
+Longest word: accomplishments
+Words appearing only once: 1097
 
 TOP 10 MOST COMMON WORDS
 ------------------------------
@@ -30,17 +37,11 @@ TOP 10 MOST COMMON WORDS
 9  - it      108      times (1.34 %)
 10 - in      108      times (1.34 %)
 
-WORD STATISTICS
---------------------
-Shortest word: a
-Longest word: accomplishments
-Words appearing only once: 1097
-
 SENTENCE STATISTICS
 -------------------------
 Total sentences: 415
-Shortest sentence: 23
-Longest sentence: 652
+Shortest sentence: 4
+Longest sentence: 109
 Shortest sentence text: That is the difference.
 Longest sentence text: Some do not wash themselves; some wash only their fingers; some think
 that the filthier they are, the "holier" they are; some cut off their
@@ -62,7 +63,6 @@ Punctuation: 1188
 
 TOP 10 MOST COMMON LETTERS
 ------------------------------
-
 1  - e       4603     times (10.15 %)
 2  - t       3296     times (7.27 %)
 3  - o       2809     times (6.19 %)
@@ -73,6 +73,7 @@ TOP 10 MOST COMMON LETTERS
 8  - h       2076     times (4.58 %)
 9  - r       1982     times (4.37 %)
 10 - d       1406     times (3.10 %)
+
 ============================================================
 End of Analysis Report
 ============================================================

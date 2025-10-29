@@ -1,4 +1,5 @@
 from datetime import datetime
+import analyse
 
 
 PATH = '../exports/'
@@ -53,11 +54,11 @@ def write_character_statistics(file, statistics):
 
 
 def write_sentence_statistics(file, statistics):
-    file.write('SENTENCE STATISTICS\n')
+    file.write('\nSENTENCE STATISTICS\n')
     file.write('-------------------------\n')
     file.write(f'Total sentences: {statistics["total_sentences"]}\n')
-    file.write(f'Shortest sentence: {len(statistics["shortest_sentence"])}\n')
-    file.write(f'Longest sentence: {len(statistics["longest_sentence"])}\n')
+    file.write(f'Shortest sentence: {analyse.length_in_words(statistics["shortest_sentence"])}\n')
+    file.write(f'Longest sentence: {analyse.length_in_words(statistics["longest_sentence"])}\n')
     file.write(f'Shortest sentence text: {statistics["shortest_sentence"]}\n')
     file.write(f'Longest sentence text: {statistics["longest_sentence"]}\n\n')
 
