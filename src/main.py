@@ -3,22 +3,16 @@ import time
 import display
 import export
 
+
 # Color codes
 RED = '\033[91m'
 GREEN = '\033[92m'
-YELLOW = '\033[93m'
-BLUE = '\033[94m'
-MAGENTA = '\033[95m'
-CYAN = '\033[96m'
-WHITE = '\033[97m'
 RESET = '\033[0m'  # Reset to default color
-BOLD = '\033[1m'
+
 
 def main():
     flag = True
-    statistics = {
-        "filename": "" # dictionary containing statistics for the whole book
-    }                  # it's used like a struct
+    statistics = {"filename": ""}
 
     while flag:
         print("\n=====================================")
@@ -32,12 +26,9 @@ def main():
         print("\t 6) Export results")
         print("\t 0) Exit program")
         print("=====================================")
-        print(
-            f"\t{('Current file: ' + statistics['filename']) if statistics['filename'] != '' else 'No file loaded'}"
-        )
+        print(f"\t{('Current file: ' + statistics['filename']) if statistics['filename'] != '' else 'No file loaded'}")
 
         choice = input("\n\tInsert your choice (0 - 6): ")
-
         match choice:
             case "1":
                 print()
@@ -78,10 +69,6 @@ def main():
             case _:
                 print(f"\n\t{RED}Invalid choice! Please select a number between 0 and 6.{RESET}")
                 time.sleep(3)
-                # TODO: Add a punishment when the user enters an invalid choices multiple times. Depending how many char
-                #  the user inputs.
 
-
-# ----------------------------------------------------------------------------------------------------------------------
 
 main()
