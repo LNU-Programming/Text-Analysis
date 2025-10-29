@@ -5,21 +5,23 @@ RESET = "\033[0m"  # Reset to default color
 
 SENTENCE_ENDERS = (".", "!", "?", ':--')
 SENTENCE_EXCEPTIONS = ["dr.", "mr.", "mrs.", "ms."]
-PARAGRAPH_ENDERS = {"\n\n"}
 WORD_BOUNDARIES = {" ", "\t", "\n", ",", ";", ":"}
 TOP_WORDS_COUNT = 10
 PUNCTUATION = ('!', '"', '#', '$', '%', '&', "'", '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<', '=', '>', '?', '@', '[', '\\', ']', '^', '_', '`', '{', '|', '}', '~')
 
-# TODO: for paragraphs, couldn't we just check 'if line is just a newline, it's paragraph?
 
 def analyse_file(path: str, filename: str) -> dict[str, any]:
     statistics = initialize_statistics(filename)
     analysis_data = initialize_analysis_data()
 
     try:
-        with open(f"{path}{filename}", "r") as file:
+        with open(f"{path}{filename}", "r", encoding='utf-8') as file:
             for line in file:
                 process_line(line, statistics, analysis_data)
+
+                # According to all the paragraph counting websites this is how paragraphs are counted.
+                if line.strip():
+                    statistics['total_paragraphs'] += 1
 
         finalize_remaining_data(statistics, analysis_data)
         calculate_final_statistics(statistics, analysis_data)
@@ -262,12 +264,14 @@ def length_in_words(sentence: str) -> int:
 
 
 def add_sentence_length_distribution(sentence_length_distribution: list, current_sentence: str) -> list:
-    if len(sentence_length_distribution) < length_in_words(current_sentence):
-        # The list is extended by as many spaces as the difference between the current sentence and the distribution list
-        difference = length_in_words(current_sentence) - len(sentence_length_distribution)
-        sentence_length_distribution.extend([0 for _ in range(difference)])
-        sentence_length_distribution[length_in_words(current_sentence) - 1] = 1
-    else:
-        sentence_length_distribution[length_in_words(current_sentence) - 1] += 1
+    # Checks if the sentence is not just a single dot.
+    if length_in_words(current_sentence) > 0:
+        if len(sentence_length_distribution) < length_in_words(current_sentence):
+            # The list is extended by as many spaces as the difference between the current sentence and the distribution list
+            difference = length_in_words(current_sentence) - len(sentence_length_distribution)
+            sentence_length_distribution.extend([0 for _ in range(difference)])
+            sentence_length_distribution[length_in_words(current_sentence) - 1] = 1
+        else:
+            sentence_length_distribution[length_in_words(current_sentence) - 1] += 1
 
     return sentence_length_distribution
