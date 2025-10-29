@@ -36,3 +36,34 @@ Shortest word: a
 Longest word: accomplishments
 Words appearing only once: 1097
 
+SENTENCE STATISTICS
+-------------------------
+Total sentences: 415
+Shortest sentence: 23
+Longest sentence: 652
+Shortest sentence text: That is the difference.
+Longest sentence text: Some do not wash themselves; some wash only their fingers; some think
+that the filthier they are, the "holier" they are; some cut off their
+hair, while others let it grow long; some refuse to stand up, while
+others refuse to sit down; some amputate their genitals, and some their
+breasts; some pull out their teeth, and others wither their limbs; some
+fast, and others gorge themselves; some cover their heads with sand, and
+others with sackcloth and ashes; some talk continuously, and others
+remain silent; some are celibates, and others are profligates; some
+stand on their heads; some brand themselves, while others pierce their
+nose, eyes and ears.
+
+CHARACTER STATISTICS
+-------------------------
+Letters: 35837
+Digits: 8
+Spaces: 8333
+Punctuation: 1188
+
+TOP 10 MOST COMMON LETTERS
+------------------------------
+
+============================================================
+End of Analysis Report
+============================================================
+

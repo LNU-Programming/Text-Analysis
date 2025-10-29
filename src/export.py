@@ -36,8 +36,30 @@ def export_to_txt(statistics: dict):
             file.write('--------------------\n')
             file.write(f'Shortest word: {statistics["shortest_word"]}\n')
             file.write(f'Longest word: {statistics["longest_word"]}\n')
-            file.write(f'Words appearing only once: {statistics["words_appearing_once"]}\n')
+            file.write(f'Words appearing only once: {statistics["words_appearing_once"]}\n\n')
 
+            file.write('SENTENCE STATISTICS\n')
+            file.write('-------------------------\n')
+            file.write(f'Total sentences: {statistics["total_sentences"]}\n')
+            file.write(f'Shortest sentence: {len(statistics["shortest_sentence"])}\n')
+            file.write(f'Longest sentence: {len(statistics["longest_sentence"])}\n')
+            file.write(f'Shortest sentence text: {statistics["shortest_sentence"]}\n')
+            file.write(f'Longest sentence text: {statistics["longest_sentence"]}\n\n')
+
+            file.write('CHARACTER STATISTICS\n')
+            file.write('-------------------------\n')
+            file.write(f'Letters: {statistics["total_letters"]}\n')
+            file.write(f'Digits: {statistics["total_digits"]}\n')
+            file.write(f'Spaces: {statistics["total_spaces"]}\n')
+            file.write(f'Punctuation: {statistics["total_punctuation"]}\n\n')
+
+            file.write('TOP 10 MOST COMMON LETTERS\n')
+            file.write('------------------------------\n\n')
+            #TODO: add this one
+
+            file.write('============================================================\n')
+            file.write('End of Analysis Report\n')
+            file.write('============================================================\n')
 
             file.write(f'\n')
 
