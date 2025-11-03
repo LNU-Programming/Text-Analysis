@@ -4,7 +4,7 @@ GREEN = "\033[92m"
 RESET = "\033[0m"  # Reset to default color
 
 SENTENCE_ENDERS = (".", "!", "?", ':--')
-SENTENCE_EXCEPTIONS = ["dr", "mr", "mrs", "ms", "inc", "ltd", "co", "corp", "llc", "plc", "u.s", "u.k", "e.u", "u.n", "ph.d", "e.g", "i.e", "etc"]
+SENTENCE_EXCEPTIONS = ["dr", "mr", "st", "mrs", "ms", "inc", "ltd", "co", "corp", "llc", "plc", "u.s", "u.k", "e.u", "u.n", "ph.d", "e.g", "i.e", "etc"]
 TOP_WORDS_COUNT = 10
 PUNCTUATION = ('!', '"', '#', '$', '%', '&', "'", '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<', '=', '>', '?', '@', '[', '\\', ']', '^', '_', '`', '{', '|', '}', '~')
 
