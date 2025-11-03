@@ -46,7 +46,24 @@ def word_analysis(statistics) -> None:
 
 def sentence_analysis(statistics) -> None:
     print(f'\n--- Sentence Analysis for "{statistics["filename"]}" ---')
-    print(f"Total sentences: {statistics['total_sentences']}")
+
+    lix_score = statistics["lix_score"]
+    if lix_score < 25:
+        difficulty = "Very Easy (children's books)"
+    elif lix_score < 35:
+        difficulty = "Easy (fiction, popular magazines)"
+    elif lix_score < 45:
+        difficulty = "Medium (newspaper text)"
+    elif lix_score < 55:
+        difficulty = "Difficult (technical/professional text)"
+    else:
+        difficulty = "Very Difficult (academic/legal text)"
+
+    print(f'\nLIX Readability Score: {lix_score:.2f} - {difficulty}')
+    print(f'Long words (>6 characters): {statistics["long_words"]} ({statistics["long_words"] / statistics["total_words"] * 100:.2f}%)')
+
+
+    print(f"\nTotal sentences: {statistics['total_sentences']}")
     print(f"Average words per sentence: {statistics['average_words_per_sentence']:.2f}")
     print(f"\nShortest sentence: {analyse.length_in_words(statistics['shortest_sentence'])}")
     print(f"\nLongest sentence: {analyse.length_in_words(statistics['longest_sentence'])}")

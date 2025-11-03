@@ -63,7 +63,10 @@ def initialize_statistics(filename: str) -> dict[str, any]:
         "letter_frequency_distribution": {},  # Ok
         "punctuation_distribution": {},  # Ok
         "case_distribution": [0, 0],  # Ok
-        "ten_most_common_letters": {} # Ok
+        "ten_most_common_letters": {}, # Ok
+        # ==== Readability scores ====
+        "lix_score": 0.0,  # Ok
+        "long_words": 0,  # Ok
     }
 
 
@@ -75,6 +78,7 @@ def initialize_analysis_data() -> dict[str, any]:
         "current_word": "",
         "current_sentence": "",
         "unique_words": set(),
+        "long_words": 0,  # words with more than 6 characters (for LIX score)
     }
 
 
@@ -158,6 +162,9 @@ def finalize_current_word(statistics: dict, analysis_data: dict) -> None:
         statistics["total_characters_without_spaces"] += len(current_word)
         analysis_data["word_lengths"][len(current_word) - 1] += 1
 
+        if len(current_word) > 6:
+            analysis_data["long_words"] += 1
+
         if len(statistics["shortest_word"]) > len(current_word):
             statistics["shortest_word"] = current_word
 
@@ -197,6 +204,9 @@ def calculate_final_statistics(statistics: dict, analysis_data: dict) -> None:
     statistics["words_appearing_once"] = word_appearing_only_once(analysis_data["all_words"])
 
     statistics["average_words_per_sentence"] = (statistics["total_words"] / statistics["total_sentences"])
+
+    statistics["long_words"] = analysis_data["long_words"]
+    statistics["lix_score"] = calculate_lix_score(statistics)
 
 
 def most_common_words(all_words: dict) -> dict:
@@ -263,3 +273,17 @@ def add_sentence_length_distribution(sentence_length_distribution: list, current
             sentence_length_distribution[length_in_words(current_sentence) - 1] += 1
 
     return sentence_length_distribution
+
+
+def calculate_lix_score(statistics: dict) -> float:
+    # LIX = (words / sentences) + (long_words × 100 / words)
+    # where long_words are words with more than 6 characters
+    if statistics["total_sentences"] == 0 or statistics["total_words"] == 0:
+        return 0.0
+
+    words_per_sentence = statistics["total_words"] / statistics["total_sentences"]
+    long_words_percentage = (statistics["long_words"] * 100) / statistics["total_words"]
+
+    lix_score = words_per_sentence + long_words_percentage
+
+    return lix_score
