@@ -4,7 +4,7 @@ GREEN = "\033[92m"
 RESET = "\033[0m"  # Reset to default color
 
 SENTENCE_ENDERS = (".", "!", "?", ':--')
-SENTENCE_EXCEPTIONS = ["dr.", "mr.", "mrs.", "ms."]
+SENTENCE_EXCEPTIONS = ["dr", "mr", "mrs", "ms", "inc", "ltd", "co", "corp", "llc", "plc", "u.s", "u.k", "e.u", "u.n", "ph.d", "e.g", "i.e", "etc"]
 WORD_BOUNDARIES = {" ", "\t", "\n", ",", ";", ":"}
 TOP_WORDS_COUNT = 10
 PUNCTUATION = ('!', '"', '#', '$', '%', '&', "'", '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<', '=', '>', '?', '@', '[', '\\', ']', '^', '_', '`', '{', '|', '}', '~')
@@ -90,7 +90,7 @@ def process_character(char: str, statistics: dict, analysis_data: dict) -> None:
     analysis_data["current_sentence"] += char
 
     # Check if we are at the end of a sentence
-    if char in SENTENCE_ENDERS:
+    if char in SENTENCE_ENDERS and analysis_data["current_word"].lower() not in SENTENCE_EXCEPTIONS:
         statistics["sentence_length_distribution"] = add_sentence_length_distribution(statistics["sentence_length_distribution"], analysis_data["current_sentence"])
 
         statistics["longest_sentence"] = (analysis_data["current_sentence"].strip() if length_in_words(analysis_data["current_sentence"]) > length_in_words(statistics["longest_sentence"]) else statistics["longest_sentence"])
