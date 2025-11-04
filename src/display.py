@@ -1,9 +1,17 @@
 import analyse
 import graph
 
+BOLD = '\033[1m'
+ITALIC = '\033[3m'
+UNDERLINE = '\033[4m'
+RED = '\033[91m'
+GREEN = '\033[92m'
+CYAN = '\033[96m'
+RESET = '\033[0m'
+
 def basic_statistics(statistics: dict) -> None:
-    print(f'--- Basic Statistics for "{statistics["filename"]}" ---')
-    print(f"Lines: {statistics['total_lines']}")
+    print(f'{BOLD}--- Basic Statistics for "{statistics["filename"]}" ---{RESET}')
+    print(f"\nLines: {statistics['total_lines']}")
     print(f"Paragraphs: {statistics['total_paragraphs']}")
     print(f"Sentences: {statistics['total_sentences']}")
     print(f"Words: {statistics['total_words']}")
@@ -13,39 +21,37 @@ def basic_statistics(statistics: dict) -> None:
     print(f"Average words per sentence: {statistics['average_words_per_sentence']:.2f}")
     print(f"Average word length: {statistics['avg_word_length']:.2f}")
 
-    print("\nGenerating basic statistics visualization...")
+    print(f"\n{ITALIC}Generating basic statistics visualization...{RESET}")
 
     graph.text_composition(statistics)
     graph.character_type_distribution(statistics)
 
-    print("Press ENTER to continue...")
     return None
 
 
 def word_analysis(statistics) -> None:
-    print(f'--- Word Analysis for "{statistics["filename"]}" ---')
-    print("Top 10 most common words:")
+    print(f'{BOLD}--- Word Analysis for "{statistics["filename"]}" ---{RESET}')
+    print("\nTop 10 most common words:")
     for i, word in enumerate(statistics["ten_most_common_words"]):
         print(f"{i + 1:<3}- {word:<8}{statistics['ten_most_common_words'][word]:<8} times ({statistics['ten_most_common_words'][word] / statistics['total_words'] * 100:.2f} %)")
 
     print("\nWord length statistics:")
-    print(f"\tShortest word: {statistics['shortest_word']}, {len(statistics['shortest_word'])} characters")
-    print(f"\tLongest word: {statistics['longest_word']}, {len(statistics['longest_word'])} characters")
+    print(f"\tShortest word: {ITALIC}{statistics['shortest_word']}{RESET}, {len(statistics['shortest_word'])} characters")
+    print(f"\tLongest word: {ITALIC}{statistics['longest_word']}{RESET}, {len(statistics['longest_word'])} characters")
     print(f"\tAverage word length: {statistics['avg_word_length']:.2f} characters")
     print(f"Unique word count: {statistics['unique_word_count']}")
     print(f"Words appearing only once: {statistics['words_appearing_once']}")
 
-    print("\nGenerating word analysis visualization...")
+    print(F"\n{ITALIC}Generating word analysis visualization...{RESET}")
 
     graph.most_common_words_graph(statistics)
     graph.word_length_distribution_graph(statistics)
 
-    print("Press ENTER to continue...")
     return None
 
 
 def sentence_analysis(statistics) -> None:
-    print(f'\n--- Sentence Analysis for "{statistics["filename"]}" ---')
+    print(f'\n{BOLD}--- Sentence Analysis for "{statistics["filename"]}" ---{RESET}')
 
     lix_score = statistics["lix_score"]
     if lix_score < 25:
@@ -65,11 +71,11 @@ def sentence_analysis(statistics) -> None:
 
     print(f"\nTotal sentences: {statistics['total_sentences']}")
     print(f"Average words per sentence: {statistics['average_words_per_sentence']:.2f}")
-    print(f"\nShortest sentence: {analyse.length_in_words(statistics['shortest_sentence'])}")
-    print(f"\nLongest sentence: {analyse.length_in_words(statistics['longest_sentence'])}")
+    print(f"Shortest sentence: {analyse.length_in_words(statistics['shortest_sentence'])}")
+    print(f"Longest sentence: {analyse.length_in_words(statistics['longest_sentence'])}")
 
-    print(f"Shortest sentence text: {statistics['shortest_sentence']}")
-    print(f"Longest sentence text: {statistics['longest_sentence']}")
+    print(f"\nShortest sentence text: {ITALIC}{statistics['shortest_sentence']}{RESET}")
+    print(f"\nLongest sentence text:\n{ITALIC}{statistics['longest_sentence']}{RESET}")
 
     print("\nSentence length distribution:")
     copy_of_distribution = statistics["sentence_length_distribution"]
@@ -77,16 +83,15 @@ def sentence_analysis(statistics) -> None:
         print(f'{i + 1:<3} words: {max(copy_of_distribution):<4} sentences ({max(copy_of_distribution) / statistics['total_sentences'] * 100:.2f} %)')
         copy_of_distribution.remove(max(copy_of_distribution))
 
-    print("Generating sentence analysis visualisation...")
+    print(F"\n{ITALIC}Generating sentence analysis visualisation...{RESET}")
     graph.sentence_length_distribution_graph(statistics)
     graph.most_common_sentence_length(statistics)
-    print("Press Enter to continue...")
 
     return None
 
 def character_analysis(statistics) -> None:
-    print(f'\n--- Character Analysis for "{statistics["filename"]}" ---')
-    print('Character type distribution:')
+    print(f'\n{BOLD}--- Character Analysis for "{statistics["filename"]}" ---{RESET}')
+    print('\nCharacter type distribution:')
 
     if statistics['total_characters_with_spaces'] > 0:
         percentage_letters = (statistics['total_letters'] / statistics['total_characters_with_spaces']) * 100
@@ -119,9 +124,8 @@ def character_analysis(statistics) -> None:
     print(f'\tLower characters: {statistics['case_distribution'][0]}')
     print(f'\tUpper characters: {statistics['case_distribution'][1]}')
 
-    print('Generating character analysis visualisation...')
+    print(f'\n{ITALIC}Generating character analysis visualisation...{RESET}')
     graph.ten_most_common_letters_graph(statistics)
     graph.character_type_distribution(statistics)
-    print('Press ENTER to continue...')
 
     return None

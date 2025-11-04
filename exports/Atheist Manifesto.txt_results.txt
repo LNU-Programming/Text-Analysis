@@ -2,20 +2,20 @@
 	TEXT ANALYSIS RESULTS
 ============================================================
 File analysed: Atheist Manifesto.txt
-Analysis date: 2025-10-29
+Analysis date: 2025-11-04
 
 BASIC STATISTICS
 --------------------
 Lines: 1091
 Paragraphs: 775
-Sentences: 415
+Sentences: 407
 Words: 8059
 Unique words: 1793
 Characters (with spaces): 45367
 Characters (without spaces): 35837
 Average words per line: 7.39
-Average word length: 537.27
-Average words per sentence: 19.42
+Average word length: 4.45
+Average words per sentence: 19.80
 
 
 WORD STATISTICS
@@ -39,7 +39,7 @@ TOP 10 MOST COMMON WORDS
 
 SENTENCE STATISTICS
 -------------------------
-Total sentences: 415
+Total sentences: 407
 Shortest sentence: 4
 Longest sentence: 109
 Shortest sentence text: That is the difference.
