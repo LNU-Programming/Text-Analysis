@@ -109,6 +109,7 @@ def character_analysis(statistics) -> None:
     print(f'\tSpaces: {statistics["total_spaces"]}, {percentage_spaces:.2f}%')
     print(f'\tPunctuation: {statistics["total_punctuation"]}, {percentage_punctuation:.2f}%')
 
+    # TODO: character ordering
     print('\nLetters distribution:')
     for i, key in enumerate(statistics['letter_frequency_distribution']):
         percentage = (statistics['letter_frequency_distribution'][key] / statistics['total_characters_with_spaces']) * 100

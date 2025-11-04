@@ -2,20 +2,20 @@
 	TEXT ANALYSIS RESULTS
 ============================================================
 File analysed: Dracula.txt
-Analysis date: 2025-10-29
+Analysis date: 2025-11-04
 
 BASIC STATISTICS
 --------------------
 Lines: 15326
 Paragraphs: 12978
-Sentences: 9499
+Sentences: 9106
 Words: 162843
 Unique words: 9226
 Characters (with spaces): 842184
 Characters (without spaces): 640872
 Average words per line: 10.63
 Average word length: 3.94
-Average words per sentence: 17.14
+Average words per sentence: 17.88
 
 
 WORD STATISTICS
@@ -39,13 +39,17 @@ TOP 10 MOST COMMON WORDS
 
 SENTENCE STATISTICS
 -------------------------
-Total sentences: 9499
+Total sentences: 9106
 Shortest sentence: 3
 Longest sentence: 155
-Shortest sentence text: “Your friend,
+
+Shortest sentence text:
+ “Your friend,
 
 “DRACULA.
-Longest sentence text: This vampire which is
+
+Longest sentence text:
+ This vampire which is
 amongst us is of himself so strong in person as twenty men; he is of
 cunning more than mortal, for his cunning be the growth of ages; he have
 still the aids of necromancy, which is, as his etymology imply, the

@@ -125,6 +125,7 @@ def process_character(char: str, statistics: dict, analysis_data: dict) -> None:
     else:
         finalize_current_word(statistics, analysis_data)
 
+    # TODO: handle doesn't and cases like this
 
 def add_to_case_distribution(char: str, statistics: dict):
     if char.isupper():

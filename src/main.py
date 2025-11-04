@@ -10,7 +10,7 @@ to terminal text output.
 Structure:
     '\\033[<code>m'
 
-    - \\033 = Escape character
+    - \\033 = Escape character for ANSI sequences
     - [     = Starts the sequence
     - <code>= Number defining the color/style
     - m     = Ends the sequence
