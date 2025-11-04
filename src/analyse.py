@@ -159,7 +159,7 @@ def process_character(char: str, statistics: dict, analysis_data: dict) -> None:
         add_to_punctuation_distribution(char, statistics)
 
     # Check if we are at the end of a word
-    if char.isalpha():
+    if char.isalpha() or (char in "'’"):
         analysis_data["current_word"] += char.lower()
 
         add_to_case_distribution(char, statistics)
