@@ -1,3 +1,10 @@
+"""Export module for text analysis results.
+
+This module provides functionality to export text analysis statistics to a formatted
+text file. It generates a comprehensive report including basic statistics, word analysis,
+sentence analysis, and character statistics.
+"""
+
 from datetime import datetime
 import analyse
 
@@ -10,6 +17,18 @@ RESET = "\033[0m"  # Reset to default color
 
 
 def export_to_txt(statistics: dict):
+    """Export text analysis statistics to a formatted text file.
+
+    Creates a comprehensive analysis report file with formatted sections for basic
+    statistics, word statistics, sentence statistics, and character statistics.
+    The file is saved in the exports directory with a filename based on the
+    analyzed text's filename.
+
+    Args:
+        statistics (dict): A dictionary containing all analysis results with keys including:
+    Returns:
+        None
+    """
     export_name = statistics['filename'] + '_results.txt'
 
     try:
@@ -40,6 +59,18 @@ def export_to_txt(statistics: dict):
 
 
 def write_character_statistics(file, statistics):
+    """Write character statistics section to the export file.
+
+    Outputs detailed character analysis including counts of letters, digits, spaces,
+    and punctuation marks. Also includes the top 10 most common letters with their
+    frequencies and percentages.
+
+    Args:
+        file: File object opened in write mode
+        statistics (dict): Dictionary containing character statistics with keys:
+    Returns:
+        None
+    """
     file.write('CHARACTER STATISTICS\n')
     file.write('-------------------------\n')
     file.write(f'Letters: {statistics["total_letters"]}\n')
@@ -54,6 +85,18 @@ def write_character_statistics(file, statistics):
 
 
 def write_sentence_statistics(file, statistics):
+    """Write sentence statistics section to the export file.
+
+    Outputs sentence analysis including total sentence count, shortest and longest
+    sentence lengths in words, and the full text of both the shortest and longest
+    sentences.
+
+    Args:
+        file: File object opened in write mode
+        statistics (dict): Dictionary containing sentence statistics with keys:
+    Returns:
+        None
+    """
     file.write('\nSENTENCE STATISTICS\n')
     file.write('-------------------------\n')
     file.write(f'Total sentences: {statistics["total_sentences"]}\n')
@@ -64,6 +107,17 @@ def write_sentence_statistics(file, statistics):
 
 
 def write_word_statistics(file, statistics):
+    """Write word statistics section to the export file.
+
+    Outputs word analysis including shortest and longest words, words appearing only
+    once, and the top 10 most common words with their frequencies and percentages.
+
+    Args:
+        file: File object opened in write mode
+        statistics (dict): Dictionary containing word statistics with keys:
+    Returns:
+        None
+    """
     file.write('\nWORD STATISTICS\n')
     file.write('--------------------\n')
     file.write(f'Shortest word: {statistics["shortest_word"]}\n')
@@ -77,6 +131,18 @@ def write_word_statistics(file, statistics):
 
 
 def write_basic_statistics(file, statistics):
+    """Write basic statistics section to the export file.
+
+    Outputs fundamental text metrics including counts of lines, paragraphs, sentences,
+    words, and characters, as well as calculated averages for words per line, word
+    length, and words per sentence.
+
+    Args:
+        file: File object opened in write mode
+        statistics (dict): Dictionary containing basic statistics with keys:
+    Returns:
+        None
+    """
     file.write('BASIC STATISTICS\n')
     file.write('--------------------\n')
     file.write(f'Lines: {statistics['total_lines']}\n')
