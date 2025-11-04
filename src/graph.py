@@ -1,7 +1,22 @@
+"""
+Graph visualization module for text analysis statistics.
+
+This module provides functions to create various visualizations of text statistics
+using matplotlib, including pie charts, bar charts, and distribution graphs for
+character types, word frequencies, sentence lengths, and other text metrics.
+"""
 import matplotlib.pyplot as plt
 
 
-def character_type_distribution(stats):
+def character_type_distribution(stats: dict) -> None:
+    """
+    Display a pie chart showing the distribution of character types in the text.
+
+    Args:
+        stats (dict): A dictionary containing text statistics
+    Returns:
+        None: Displays a matplotlib pie chart window.
+    """
     labels = ['Letters', 'Digits', 'Spaces', 'Punctuation']
     values = [stats['total_letters'], stats['total_digits'],
               stats['total_spaces'], stats['total_punctuation']]
@@ -12,7 +27,15 @@ def character_type_distribution(stats):
     plt.show()
 
 
-def text_composition(stats):
+def text_composition(stats: dict) -> None:
+    """
+    Display a bar chart showing the composition of the text by structural elements.
+
+    Args:
+        stats (dict): A dictionary containing text statistics
+    Returns:
+        None: Displays a matplotlib bar chart window.
+    """
     categories = ['Lines', 'Paragraphs', 'Sentences', 'Words']
     values = [stats['total_lines'], stats['total_paragraphs'],
               stats['total_sentences'], stats['total_words']]
@@ -22,7 +45,15 @@ def text_composition(stats):
     plt.show()
 
 
-def most_common_words_graph(stats):
+def most_common_words_graph(stats: dict) -> None:
+    """
+    Display a bar chart of the 10 most frequently occurring words in the text.
+
+    Args:
+        stats (dict): A dictionary containing text statistics
+    Returns:
+        None: Displays a matplotlib bar chart window.
+    """
     words = list(stats['ten_most_common_words'].keys())
     counts = list(stats['ten_most_common_words'].values())
 
@@ -31,7 +62,15 @@ def most_common_words_graph(stats):
     plt.show()
 
 
-def word_length_distribution_graph(stats):
+def word_length_distribution_graph(stats: dict) -> None:
+    """
+    Display a bar chart showing the distribution of word lengths in the text.
+
+    Args:
+        stats (dict): A dictionary containing text statistics
+    Returns:
+        None: Displays a matplotlib bar chart window.
+    """
     lengths = list(range(1, len(stats['word_length_distribution']) + 1))
     counts = stats['word_length_distribution']
 
@@ -40,7 +79,15 @@ def word_length_distribution_graph(stats):
     plt.show()
 
 
-def sentence_length_distribution_graph(stats):
+def sentence_length_distribution_graph(stats: dict) -> None:
+    """
+    Display a bar chart showing the distribution of sentence lengths in the text.
+
+    Args:
+        stats (dict): A dictionary containing text statistics
+    Returns:
+        None: Displays a matplotlib bar chart window.
+    """
     lengths = list(range(1, len(stats['sentence_length_distribution']) + 1))
     counts = stats['sentence_length_distribution']
 
@@ -49,11 +96,30 @@ def sentence_length_distribution_graph(stats):
     plt.show()
 
 
-# Helper function to get the count (second element) for sorting
-def get_count(pair):
+def get_count(pair: dict) -> None:
+    """
+    Helper function to extract the count value from a (length, count) tuple.
+
+    Args:
+        pair (tuple): A tuple containing (length, count) where count is at index 1
+    Returns:
+        int: The count value (second element) from the tuple
+    """
     return pair[1]
 
 def most_common_sentence_length(stats):
+    """
+    Display a bar chart of the 8 most common sentence lengths in the text.
+
+    This function analyzes the sentence length distribution, identifies the 8 most
+    frequently occurring sentence lengths, and displays them as a bar chart sorted
+    by frequency.
+
+    Args:
+        stats (dict): A dictionary containing text statistics with keys
+    Returns:
+        None: Displays a matplotlib bar chart window.
+    """
     distribution = stats['sentence_length_distribution']
 
     # Create pairs of (length, count) and sort by count descending
@@ -73,6 +139,14 @@ def most_common_sentence_length(stats):
 
 
 def ten_most_common_letters_graph(stats):
+    """
+    Display a bar chart of the 10 most frequently occurring letters in the text.
+
+    Args:
+        stats (dict): A dictionary containing text statistics with keys
+    Returns:
+        None: Displays a matplotlib bar chart window.
+    """
     letters = list(stats['ten_most_common_letters'].keys())
     counts = list(stats['ten_most_common_letters'].values())
 
