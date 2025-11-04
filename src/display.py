@@ -21,6 +21,7 @@ GREEN = '\033[92m'
 CYAN = '\033[96m'
 RESET = '\033[0m'
 
+
 def basic_statistics(statistics: dict) -> None:
     """
     Display basic text statistics and generate related visualizations.
@@ -177,17 +178,11 @@ def character_analysis(statistics) -> None:
     print(f'\tSpaces: {statistics["total_spaces"]}, {percentage_spaces:.2f}%')
     print(f'\tPunctuation: {statistics["total_punctuation"]}, {percentage_punctuation:.2f}%')
 
-    # TODO: character ordering
     print('\nLetters distribution:')
-    for i, key in enumerate(statistics['letter_frequency_distribution']):
-        percentage = (statistics['letter_frequency_distribution'][key] / statistics['total_characters_with_spaces']) * 100
-        print(f'{i + 1:<2} - "{key}" : {statistics['letter_frequency_distribution'][key]:<8} ({percentage:.2f}%)')
+    print_sorted_dict_by_value(statistics['letter_frequency_distribution'], statistics['total_characters_with_spaces'])
 
     print('\nPunctuation distribution:')
-    for i, key in enumerate(statistics['punctuation_distribution']):
-        percentage = (statistics['punctuation_distribution'][key] / statistics[
-            'total_characters_with_spaces']) * 100
-        print(f'{i + 1:<2} - "{key}" : {statistics['punctuation_distribution'][key]:<8} ({percentage:.2f}%)')
+    print_sorted_dict_by_value(statistics['punctuation_distribution'], statistics['total_characters_with_spaces'])
 
     print('\nLower/upper case distribution:')
     print(f'\tLower characters: {statistics['case_distribution'][0]}')
@@ -196,5 +191,30 @@ def character_analysis(statistics) -> None:
     print(f'\n{ITALIC}Generating character analysis visualisation...{RESET}')
     graph.ten_most_common_letters_graph(statistics)
     graph.character_type_distribution(statistics)
+
+    return None
+
+
+def print_sorted_dict_by_value(data_dict: dict, total_chars: int) -> None:
+    """
+    Print dictionary items sorted by value in descending order.
+
+    Displays dictionary elements with their keys and values, sorted from highest
+    to lowest value. Each entry is formatted with an index, the key in quotes,
+    the value, and a percentage calculated against the total_chars parameter.
+
+    Args:
+        data_dict (dict): Dictionary to display, with string keys and numeric values
+        total_chars (int): Total count used for percentage calculation
+    Returns:
+        None
+    """
+    # Sort dictionary items by value in descending order
+    sorted_items = sorted(data_dict.items(), key=lambda item: item[1], reverse=True)
+
+    # Print each item with the same format as the original
+    for i, (key, value) in enumerate(sorted_items):
+        percentage = (value / total_chars) * 100 if total_chars > 0 else 0
+        print(f'{i + 1:<2} - "{key}" : {value:<8} ({percentage:.2f}%)')
 
     return None
