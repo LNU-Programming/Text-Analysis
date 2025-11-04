@@ -59,8 +59,8 @@ def write_sentence_statistics(file, statistics):
     file.write(f'Total sentences: {statistics["total_sentences"]}\n')
     file.write(f'Shortest sentence: {analyse.length_in_words(statistics["shortest_sentence"])}\n')
     file.write(f'Longest sentence: {analyse.length_in_words(statistics["longest_sentence"])}\n')
-    file.write(f'Shortest sentence text: {statistics["shortest_sentence"]}\n')
-    file.write(f'Longest sentence text: {statistics["longest_sentence"]}\n\n')
+    file.write(f'\nShortest sentence text:\n {statistics["shortest_sentence"]}\n')
+    file.write(f'\nLongest sentence text:\n {statistics["longest_sentence"]}\n\n')
 
 
 def write_word_statistics(file, statistics):

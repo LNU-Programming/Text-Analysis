@@ -42,8 +42,12 @@ SENTENCE STATISTICS
 Total sentences: 407
 Shortest sentence: 4
 Longest sentence: 109
-Shortest sentence text: That is the difference.
-Longest sentence text: Some do not wash themselves; some wash only their fingers; some think
+
+Shortest sentence text:
+ That is the difference.
+
+Longest sentence text:
+ Some do not wash themselves; some wash only their fingers; some think
 that the filthier they are, the "holier" they are; some cut off their
 hair, while others let it grow long; some refuse to stand up, while
 others refuse to sit down; some amputate their genitals, and some their
