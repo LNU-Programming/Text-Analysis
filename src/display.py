@@ -1,3 +1,15 @@
+"""
+Display module for text analysis results.
+
+This module provides functions to display text analysis statistics in a formatted
+manner to the console. It handles the presentation of basic statistics, word analysis,
+sentence analysis, and character analysis, along with triggering the generation of
+corresponding visualizations.
+
+The module uses ANSI escape codes for text formatting (bold, italic, colors) to
+enhance the readability of console output.
+"""
+
 import analyse
 import graph
 
@@ -10,6 +22,18 @@ CYAN = '\033[96m'
 RESET = '\033[0m'
 
 def basic_statistics(statistics: dict) -> None:
+    """
+    Display basic text statistics and generate related visualizations.
+
+    Prints fundamental text metrics including line count, word count, character count,
+    and averages. Also generates visualizations for text composition and character
+    type distribution.
+
+    Args:
+        statistics (dict): A dictionary containing text analysis results with keys:
+    Returns:
+        None
+    """
     print(f'{BOLD}--- Basic Statistics for "{statistics["filename"]}" ---{RESET}')
     print(f"\nLines: {statistics['total_lines']}")
     print(f"Paragraphs: {statistics['total_paragraphs']}")
@@ -30,6 +54,18 @@ def basic_statistics(statistics: dict) -> None:
 
 
 def word_analysis(statistics) -> None:
+    """
+    Display detailed word analysis statistics and generate related visualizations.
+
+    Prints information about word usage patterns including most common words,
+    word length statistics, and unique word counts. Generates visualizations
+    for common words and word length distribution.
+
+    Args:
+        statistics (dict): A dictionary containing text analysis results with keys:
+    Returns:
+        None
+    """
     print(f'{BOLD}--- Word Analysis for "{statistics["filename"]}" ---{RESET}')
     print("\nTop 10 most common words:")
     for i, word in enumerate(statistics["ten_most_common_words"]):
@@ -51,6 +87,25 @@ def word_analysis(statistics) -> None:
 
 
 def sentence_analysis(statistics) -> None:
+    """
+    Display sentence-level analysis statistics and generate related visualizations.
+
+    Prints sentence metrics including LIX readability score, sentence length statistics,
+    and examples of shortest and longest sentences. Generates visualizations for
+    sentence length distribution.
+
+    The LIX (Läsbarhetsindex) readability score is interpreted as:
+    - < 25: Very Easy (children's books)
+    - 25-34: Easy (fiction, popular magazines)
+    - 35-44: Medium (newspaper text)
+    - 45-54: Difficult (technical/professional text)
+    - >= 55: Very Difficult (academic/legal text)
+
+    Args:
+        statistics (dict): A dictionary containing text analysis results with keys:
+    Returns:
+        None
+    """
     print(f'\n{BOLD}--- Sentence Analysis for "{statistics["filename"]}" ---{RESET}')
 
     lix_score = statistics["lix_score"]
@@ -90,6 +145,19 @@ def sentence_analysis(statistics) -> None:
     return None
 
 def character_analysis(statistics) -> None:
+    """
+    Display character-level analysis statistics and generate related visualizations.
+
+    Prints detailed character statistics including character type distribution
+    (letters, digits, spaces, punctuation), letter frequency distribution,
+    punctuation usage, and case distribution. Generates visualizations for
+    letter frequency and character types.
+
+    Args:
+        statistics (dict): A dictionary containing text analysis results with keys:
+    Returns:
+        None
+    """
     print(f'\n{BOLD}--- Character Analysis for "{statistics["filename"]}" ---{RESET}')
     print('\nCharacter type distribution:')
 
