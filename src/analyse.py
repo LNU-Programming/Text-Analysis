@@ -35,38 +35,38 @@ def initialize_statistics(filename: str) -> dict[str, any]:
     return {
         "filename": filename,
         # ==== Basic statistics ====
-        "total_lines": 0,  # Ok
-        "total_paragraphs": 0,  # Ok
-        "total_sentences": 0,  # Ok
-        "total_words": 0,  # Ok
-        "total_characters_with_spaces": 0,  # Ok
-        "total_characters_without_spaces": 0,  # Ok
-        "avg_words_per_line": 0.0, # Ok
+        "total_lines": 0,  
+        "total_paragraphs": 0,  
+        "total_sentences": 0,  
+        "total_words": 0,  
+        "total_characters_with_spaces": 0,  
+        "total_characters_without_spaces": 0,  
+        "avg_words_per_line": 0.0, 
         # ==== Word analysis ====
-        "ten_most_common_words": {},  # Ok
-        "shortest_word": "aaaaaaaaa",  # Ok
-        "longest_word": "",  # Ok
-        "avg_word_length": 0.0,  # Ok
+        "ten_most_common_words": {},  
+        "shortest_word": "aaaaaaaaa",  
+        "longest_word": "",  
+        "avg_word_length": 0.0,  
         "word_length_distribution": [],
-        "unique_word_count": 0,  # Ok
-        "words_appearing_once": 0,  # Ok
+        "unique_word_count": 0,  
+        "words_appearing_once": 0,  
         # ==== Sentence analysis ====
-        "average_words_per_sentence": 0.0,  # Ok
-        "longest_sentence": "",  # Ok
-        "shortest_sentence": "aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa",  # Ok
-        "sentence_length_distribution": [],  # Ok
+        "average_words_per_sentence": 0.0,  
+        "longest_sentence": "",  
+        "shortest_sentence": "aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa",  
+        "sentence_length_distribution": [],  
         # ==== Character analysis ====
-        "total_letters": 0,  # Ok
-        "total_digits": 0,  # Ok
-        "total_spaces": 0,  # Ok
-        "total_punctuation": 0,  # Ok
-        "letter_frequency_distribution": {},  # Ok
-        "punctuation_distribution": {},  # Ok
-        "case_distribution": [0, 0],  # Ok
-        "ten_most_common_letters": {}, # Ok
+        "total_letters": 0,  
+        "total_digits": 0,  
+        "total_spaces": 0,  
+        "total_punctuation": 0,  
+        "letter_frequency_distribution": {},  
+        "punctuation_distribution": {},  
+        "case_distribution": [0, 0],  
+        "ten_most_common_letters": {}, 
         # ==== Readability scores ====
-        "lix_score": 0.0,  # Ok
-        "long_words": 0,  # Ok
+        "lix_score": 0.0,  
+        "long_words": 0,  
     }
 
 
