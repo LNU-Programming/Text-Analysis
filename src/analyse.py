@@ -4,12 +4,22 @@ GREEN = "\033[92m"
 RESET = "\033[0m"  # Reset to default color
 
 SENTENCE_ENDERS = (".", "!", "?", ':--')
-SENTENCE_EXCEPTIONS = ["dr", "mr", "st", "mrs", "ms", "inc", "ltd", "co", "corp", "llc", "plc", "u.s", "u.k", "e.u", "u.n", "ph.d", "e.g", "i.e", "etc"]
+SENTENCE_EXCEPTIONS = ("dr", "mr", "st", "mrs", "ms", "inc", "ltd", "co", "corp", "llc", "plc", "u.s", "u.k", "e.u", "u.n", "ph.d", "e.g", "i.e", "etc")
 TOP_WORDS_COUNT = 10
 PUNCTUATION = ('!', '"', '#', '$', '%', '&', "'", '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<', '=', '>', '?', '@', '[', '\\', ']', '^', '_', '`', '{', '|', '}', '~')
 
 
 def analyse_file(path: str, filename: str) -> dict[str, any]:
+    """
+    Analyze a text file and compute comprehensive statistics.
+    
+    Args:
+        path: Directory path where the file is located
+        filename: Name of the file to analyze
+        
+    Returns:
+        Dictionary containing all computed statistics
+    """
     statistics = initialize_statistics(filename)
     analysis_data = initialize_analysis_data()
 
@@ -32,6 +42,15 @@ def analyse_file(path: str, filename: str) -> dict[str, any]:
 
 
 def initialize_statistics(filename: str) -> dict[str, any]:
+    """
+    Initialize the statistics dictionary.
+    
+    Args:
+        filename: Name of the file being analyzed
+        
+    Returns:
+        Dictionary with all statistic fields
+    """
     return {
         "filename": filename,
         # ==== Basic statistics ====
@@ -71,6 +90,13 @@ def initialize_statistics(filename: str) -> dict[str, any]:
 
 
 def initialize_analysis_data() -> dict[str, any]:
+    """
+    Initialize temporary data structures used during text analysis.
+    
+    Returns:
+        Dictionary containing temporary data structures for tracking words,
+        sentences, and other metrics during the analysis process
+    """
     return {  # Initialize the data structures used during analysis
         "all_words": {},  # used for 10 most common words
         "word_lengths": [0 for _ in range(45)],
@@ -83,12 +109,31 @@ def initialize_analysis_data() -> dict[str, any]:
 
 
 def process_line(line: str, statistics: dict, analysis_data: dict) -> None:
+    """
+    Process a single line of text by analyzing each character.
+    
+    Args:
+        line: Text line to process
+        statistics: Dictionary to store computed statistics
+        analysis_data: Dictionary with temporary analysis data
+    """
     statistics["total_lines"] += 1
     for char in line:
         process_character(char, statistics, analysis_data)
 
 
 def process_character(char: str, statistics: dict, analysis_data: dict) -> None:
+    """
+    Process a single character and update statistics accordingly.
+    
+    Handles character classification (letters, digits, spaces, punctuation),
+    words and sentences.
+    
+    Args:
+        char: Single character to process
+        statistics: Dictionary to store computed statistics
+        analysis_data: Dictionary with temporary analysis data
+    """
     statistics["total_characters_with_spaces"] += 1
     analysis_data["current_sentence"] += char
 
@@ -128,6 +173,15 @@ def process_character(char: str, statistics: dict, analysis_data: dict) -> None:
     # TODO: handle doesn't and cases like this
 
 def add_to_case_distribution(char: str, statistics: dict):
+    """
+    Update the case distribution statistics for a character.
+    
+    Tracks lowercase (index 0) and uppercase (index 1) character counts.
+    
+    Args:
+        char: Character to check (must be alphabetic)
+        statistics: Dictionary to store computed statistics
+    """
     if char.isupper():
         statistics['case_distribution'][1] += 1
     else:
@@ -135,6 +189,13 @@ def add_to_case_distribution(char: str, statistics: dict):
 
 
 def add_to_letter_frequency_distribution(char: str, statistics: dict) -> None:
+    """
+    Update the letter frequency distribution for a character.
+    
+    Args:
+        char: Character to add to distribution (converted to lowercase)
+        statistics: Dictionary to store computed statistics
+    """
     if char.lower() in statistics["letter_frequency_distribution"]:
         statistics["letter_frequency_distribution"][char.lower()] += 1
     else:
@@ -142,6 +203,13 @@ def add_to_letter_frequency_distribution(char: str, statistics: dict) -> None:
 
 
 def add_to_punctuation_distribution(char: str, statistics: dict) -> None:
+    """
+    Update the punctuation frequency distribution.
+    
+    Args:
+        char: Punctuation character to add to distribution
+        statistics: Dictionary to store computed statistics
+    """
     if char.lower() in statistics["punctuation_distribution"]:
         statistics["punctuation_distribution"][char.lower()] += 1
     else:
@@ -149,6 +217,16 @@ def add_to_punctuation_distribution(char: str, statistics: dict) -> None:
 
 
 def finalize_current_word(statistics: dict, analysis_data: dict) -> None:
+    """
+    Finalize the current word being processed and update all relevant statistics.
+    
+    Updates word count, unique words, word lengths, shortest/longest words,
+    and resets the current word buffer.
+    
+    Args:
+        statistics: Dictionary to store computed statistics
+        analysis_data: Dictionary with temporary analysis data
+    """
     current_word = analysis_data["current_word"]
 
     if current_word:
@@ -177,6 +255,15 @@ def finalize_current_word(statistics: dict, analysis_data: dict) -> None:
 
 
 def finalize_remaining_data(statistics: dict, analysis_data: dict) -> None:
+    """
+    Finalize any remaining words and sentences after file processing is complete.
+    
+    Handles edge cases where the file doesn't end with punctuation or whitespace.
+    
+    Args:
+        statistics: Dictionary to store computed statistics
+        analysis_data: Dictionary with temporary analysis data
+    """
     finalize_current_word(statistics, analysis_data)
 
     # Finalize the current sentence if it exists, it might not be ending with punctuation
@@ -187,6 +274,15 @@ def finalize_remaining_data(statistics: dict, analysis_data: dict) -> None:
 
 
 def calculate_final_statistics(statistics: dict, analysis_data: dict) -> None:
+    """
+    Calculate all final statistics that require complete data.
+    
+    Computes averages, distributions, most common words/letters, and readability scores.
+    
+    Args:
+        statistics: Dictionary to store computed statistics
+        analysis_data: Dictionary with temporary analysis data
+    """
     if statistics["total_lines"] > 0:
         statistics["avg_words_per_line"] = (statistics["total_words"] / statistics["total_lines"])
 
@@ -211,6 +307,15 @@ def calculate_final_statistics(statistics: dict, analysis_data: dict) -> None:
 
 
 def most_common_words(all_words: dict) -> dict:
+    """
+    Extract the most common words from all words dictionary.
+    
+    Args:
+        all_words: Dictionary mapping words to their frequencies
+        
+    Returns:
+        Dictionary containing the top N most common words (N = TOP_WORDS_COUNT)
+    """
     top_words = {}
     for _ in range(TOP_WORDS_COUNT):
         if not all_words:
@@ -223,6 +328,15 @@ def most_common_words(all_words: dict) -> dict:
 
 
 def list_true_length(word_len_lst: list) -> int:
+    """
+    Calculate the number of non-zero elements in a list.
+    
+    Args:
+        word_len_lst: List of integers
+        
+    Returns:
+        Count of elements that are not zero
+    """
     # Returns the length of the list, only counting elements different from 0
     true_length = 0
     for element in word_len_lst:
@@ -233,6 +347,15 @@ def list_true_length(word_len_lst: list) -> int:
 
 
 def remove_trailing_zeros(word_len_lst: list) -> list:
+    """
+    Remove trailing zero elements from a list.
+    
+    Args:
+        word_len_lst: List of integers
+        
+    Returns:
+        List with trailing zeros removed
+    """
     for index, word_len in enumerate(word_len_lst[::-1]):
         if word_len != 0:
             return word_len_lst[0:index]
@@ -241,6 +364,15 @@ def remove_trailing_zeros(word_len_lst: list) -> list:
 
 
 def word_appearing_only_once(all_words: dict) -> int:
+    """
+    Count the number of words that appear exactly once.
+    
+    Args:
+        all_words: Dictionary mapping words to their frequencies
+        
+    Returns:
+        Count of words with frequency equal to 1
+    """
     words_only_once = 0
 
     for word in all_words:
@@ -251,6 +383,18 @@ def word_appearing_only_once(all_words: dict) -> int:
 
 
 def length_in_words(sentence: str) -> int:
+    """
+    Calculate the number of words in a sentence.
+    
+    Cleans the sentence by keeping only alphabetic characters and spaces,
+    then counts the resulting words.
+    
+    Args:
+        sentence: Text string to analyze
+        
+    Returns:
+        Number of words in the sentence
+    """
     cleaned_sentence = ""
     for char in sentence:
         if char.isalpha() or char.isspace():
@@ -263,6 +407,19 @@ def length_in_words(sentence: str) -> int:
 
 
 def add_sentence_length_distribution(sentence_length_distribution: list, current_sentence: str) -> list:
+    """
+    Update the sentence length distribution.
+    
+    The distribution list is indexed by sentence length (in words).
+    Automatically extends the list if a longer sentence is encountered.
+    
+    Args:
+        sentence_length_distribution: List tracking sentence length frequencies
+        current_sentence: The sentence to add to the distribution
+        
+    Returns:
+        Updated sentence length distribution list
+    """
     # Checks if the sentence is not just a single dot.
     if length_in_words(current_sentence) > 0:
         if len(sentence_length_distribution) < length_in_words(current_sentence):
@@ -277,6 +434,18 @@ def add_sentence_length_distribution(sentence_length_distribution: list, current
 
 
 def calculate_lix_score(statistics: dict) -> float:
+    """
+    Calculate the LIX (Läsbarhetsindex) readability score.
+    
+    LIX = (words / sentences) + (long_words × 100 / words)
+    where long_words are words with more than 6 characters.
+    
+    Args:
+        statistics: Dictionary containing word and sentence statistics
+        
+    Returns:
+        LIX readability score as a float, or 0.0 if calculation is not possible
+    """
     # LIX = (words / sentences) + (long_words × 100 / words)
     # where long_words are words with more than 6 characters
     if statistics["total_sentences"] == 0 or statistics["total_words"] == 0:
