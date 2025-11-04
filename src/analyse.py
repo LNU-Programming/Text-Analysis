@@ -12,11 +12,11 @@ PUNCTUATION = ('!', '"', '#', '$', '%', '&', "'", '(', ')', '*', '+', ',', '-', 
 def analyse_file(path: str, filename: str) -> dict[str, any]:
     """
     Analyze a text file and compute comprehensive statistics.
-    
+
     Args:
         path: Directory path where the file is located
         filename: Name of the file to analyze
-        
+
     Returns:
         Dictionary containing all computed statistics
     """
@@ -44,55 +44,55 @@ def analyse_file(path: str, filename: str) -> dict[str, any]:
 def initialize_statistics(filename: str) -> dict[str, any]:
     """
     Initialize the statistics dictionary.
-    
+
     Args:
         filename: Name of the file being analyzed
-        
+
     Returns:
         Dictionary with all statistic fields
     """
     return {
         "filename": filename,
         # ==== Basic statistics ====
-        "total_lines": 0,  
-        "total_paragraphs": 0,  
-        "total_sentences": 0,  
-        "total_words": 0,  
-        "total_characters_with_spaces": 0,  
-        "total_characters_without_spaces": 0,  
-        "avg_words_per_line": 0.0, 
+        "total_lines": 0,
+        "total_paragraphs": 0,
+        "total_sentences": 0,
+        "total_words": 0,
+        "total_characters_with_spaces": 0,
+        "total_characters_without_spaces": 0,
+        "avg_words_per_line": 0.0,
         # ==== Word analysis ====
-        "ten_most_common_words": {},  
-        "shortest_word": "aaaaaaaaa",  
-        "longest_word": "",  
-        "avg_word_length": 0.0,  
+        "ten_most_common_words": {},
+        "shortest_word": "aaaaaaaaa",
+        "longest_word": "",
+        "avg_word_length": 0.0,
         "word_length_distribution": [],
-        "unique_word_count": 0,  
-        "words_appearing_once": 0,  
+        "unique_word_count": 0,
+        "words_appearing_once": 0,
         # ==== Sentence analysis ====
-        "average_words_per_sentence": 0.0,  
-        "longest_sentence": "",  
-        "shortest_sentence": "aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa",  
-        "sentence_length_distribution": [],  
+        "average_words_per_sentence": 0.0,
+        "longest_sentence": "",
+        "shortest_sentence": "aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa",
+        "sentence_length_distribution": [],
         # ==== Character analysis ====
-        "total_letters": 0,  
-        "total_digits": 0,  
-        "total_spaces": 0,  
-        "total_punctuation": 0,  
-        "letter_frequency_distribution": {},  
-        "punctuation_distribution": {},  
-        "case_distribution": [0, 0],  
-        "ten_most_common_letters": {}, 
+        "total_letters": 0,
+        "total_digits": 0,
+        "total_spaces": 0,
+        "total_punctuation": 0,
+        "letter_frequency_distribution": {},
+        "punctuation_distribution": {},
+        "case_distribution": [0, 0],
+        "ten_most_common_letters": {},
         # ==== Readability scores ====
-        "lix_score": 0.0,  
-        "long_words": 0,  
+        "lix_score": 0.0,
+        "long_words": 0,
     }
 
 
 def initialize_analysis_data() -> dict[str, any]:
     """
     Initialize temporary data structures used during text analysis.
-    
+
     Returns:
         Dictionary containing temporary data structures for tracking words,
         sentences, and other metrics during the analysis process
@@ -111,7 +111,7 @@ def initialize_analysis_data() -> dict[str, any]:
 def process_line(line: str, statistics: dict, analysis_data: dict) -> None:
     """
     Process a single line of text by analyzing each character.
-    
+
     Args:
         line: Text line to process
         statistics: Dictionary to store computed statistics
@@ -125,10 +125,10 @@ def process_line(line: str, statistics: dict, analysis_data: dict) -> None:
 def process_character(char: str, statistics: dict, analysis_data: dict) -> None:
     """
     Process a single character and update statistics accordingly.
-    
+
     Handles character classification (letters, digits, spaces, punctuation),
     words and sentences.
-    
+
     Args:
         char: Single character to process
         statistics: Dictionary to store computed statistics
@@ -175,9 +175,9 @@ def process_character(char: str, statistics: dict, analysis_data: dict) -> None:
 def add_to_case_distribution(char: str, statistics: dict):
     """
     Update the case distribution statistics for a character.
-    
+
     Tracks lowercase (index 0) and uppercase (index 1) character counts.
-    
+
     Args:
         char: Character to check (must be alphabetic)
         statistics: Dictionary to store computed statistics
@@ -191,7 +191,7 @@ def add_to_case_distribution(char: str, statistics: dict):
 def add_to_letter_frequency_distribution(char: str, statistics: dict) -> None:
     """
     Update the letter frequency distribution for a character.
-    
+
     Args:
         char: Character to add to distribution (converted to lowercase)
         statistics: Dictionary to store computed statistics
@@ -205,7 +205,7 @@ def add_to_letter_frequency_distribution(char: str, statistics: dict) -> None:
 def add_to_punctuation_distribution(char: str, statistics: dict) -> None:
     """
     Update the punctuation frequency distribution.
-    
+
     Args:
         char: Punctuation character to add to distribution
         statistics: Dictionary to store computed statistics
@@ -219,10 +219,10 @@ def add_to_punctuation_distribution(char: str, statistics: dict) -> None:
 def finalize_current_word(statistics: dict, analysis_data: dict) -> None:
     """
     Finalize the current word being processed and update all relevant statistics.
-    
+
     Updates word count, unique words, word lengths, shortest/longest words,
     and resets the current word buffer.
-    
+
     Args:
         statistics: Dictionary to store computed statistics
         analysis_data: Dictionary with temporary analysis data
@@ -257,9 +257,9 @@ def finalize_current_word(statistics: dict, analysis_data: dict) -> None:
 def finalize_remaining_data(statistics: dict, analysis_data: dict) -> None:
     """
     Finalize any remaining words and sentences after file processing is complete.
-    
+
     Handles edge cases where the file doesn't end with punctuation or whitespace.
-    
+
     Args:
         statistics: Dictionary to store computed statistics
         analysis_data: Dictionary with temporary analysis data
@@ -276,9 +276,9 @@ def finalize_remaining_data(statistics: dict, analysis_data: dict) -> None:
 def calculate_final_statistics(statistics: dict, analysis_data: dict) -> None:
     """
     Calculate all final statistics that require complete data.
-    
+
     Computes averages, distributions, most common words/letters, and readability scores.
-    
+
     Args:
         statistics: Dictionary to store computed statistics
         analysis_data: Dictionary with temporary analysis data
@@ -309,10 +309,10 @@ def calculate_final_statistics(statistics: dict, analysis_data: dict) -> None:
 def most_common_words(all_words: dict) -> dict:
     """
     Extract the most common words from all words dictionary.
-    
+
     Args:
         all_words: Dictionary mapping words to their frequencies
-        
+
     Returns:
         Dictionary containing the top N most common words (N = TOP_WORDS_COUNT)
     """
@@ -327,32 +327,13 @@ def most_common_words(all_words: dict) -> dict:
     return top_words
 
 
-def list_true_length(word_len_lst: list) -> int:
-    """
-    Calculate the number of non-zero elements in a list.
-    
-    Args:
-        word_len_lst: List of integers
-        
-    Returns:
-        Count of elements that are not zero
-    """
-    # Returns the length of the list, only counting elements different from 0
-    true_length = 0
-    for element in word_len_lst:
-        if element != 0:
-            true_length += 1
-
-    return true_length
-
-
 def remove_trailing_zeros(word_len_lst: list) -> list:
     """
     Remove trailing zero elements from a list.
-    
+
     Args:
         word_len_lst: List of integers
-        
+
     Returns:
         List with trailing zeros removed
     """
@@ -366,10 +347,10 @@ def remove_trailing_zeros(word_len_lst: list) -> list:
 def word_appearing_only_once(all_words: dict) -> int:
     """
     Count the number of words that appear exactly once.
-    
+
     Args:
         all_words: Dictionary mapping words to their frequencies
-        
+
     Returns:
         Count of words with frequency equal to 1
     """
@@ -385,13 +366,13 @@ def word_appearing_only_once(all_words: dict) -> int:
 def length_in_words(sentence: str) -> int:
     """
     Calculate the number of words in a sentence.
-    
+
     Cleans the sentence by keeping only alphabetic characters and spaces,
     then counts the resulting words.
-    
+
     Args:
         sentence: Text string to analyze
-        
+
     Returns:
         Number of words in the sentence
     """
@@ -409,14 +390,14 @@ def length_in_words(sentence: str) -> int:
 def add_sentence_length_distribution(sentence_length_distribution: list, current_sentence: str) -> list:
     """
     Update the sentence length distribution.
-    
+
     The distribution list is indexed by sentence length (in words).
     Automatically extends the list if a longer sentence is encountered.
-    
+
     Args:
         sentence_length_distribution: List tracking sentence length frequencies
         current_sentence: The sentence to add to the distribution
-        
+
     Returns:
         Updated sentence length distribution list
     """
@@ -436,13 +417,13 @@ def add_sentence_length_distribution(sentence_length_distribution: list, current
 def calculate_lix_score(statistics: dict) -> float:
     """
     Calculate the LIX (Läsbarhetsindex) readability score.
-    
+
     LIX = (words / sentences) + (long_words × 100 / words)
     where long_words are words with more than 6 characters.
-    
+
     Args:
         statistics: Dictionary containing word and sentence statistics
-        
+
     Returns:
         LIX readability score as a float, or 0.0 if calculation is not possible
     """
