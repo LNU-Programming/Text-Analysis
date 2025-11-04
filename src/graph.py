@@ -49,12 +49,17 @@ def sentence_length_distribution_graph(stats):
     plt.show()
 
 
+# Helper function to get the count (second element) for sorting
+def get_count(pair):
+    return pair[1]
+
 def most_common_sentence_length(stats):
     distribution = stats['sentence_length_distribution']
 
     # Create pairs of (length, count) and sort by count descending
     pairs = [(i + 1, count) for i, count in enumerate(distribution)]
-    pairs.sort(key=lambda x: x[1], reverse=True)
+
+    pairs.sort(key=get_count, reverse=True)
 
     # Take top 8
     top_8 = pairs[:8]
