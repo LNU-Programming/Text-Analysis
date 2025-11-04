@@ -1,3 +1,12 @@
+"""
+File loading module for text analysis application.
+
+This module provides functionality to interactively select and load text files
+from a designated data directory. It displays available .txt files to the user,
+accepts their selection via index or filename, and delegates the file analysis
+to the analyse module.
+"""
+
 import os
 import analyse
 
@@ -14,6 +23,26 @@ RESET = '\033[0m'
 
 
 def load_file() -> dict[str, any]:
+    """
+    Interactively load and analyze a text file from the data directory.
+
+    This function displays all available .txt files in the PATH directory,
+    prompts the user to select a file either by entering its index number
+    or full filename, and then passes the selected file to the analyse module
+    for processing.
+
+    The function handles various error cases:
+    - FileNotFoundError: If the data directory doesn't exist
+    - ValueError: If the user enters invalid input (non-numeric when expected)
+    - Invalid selection: If the user enters an index out of range
+
+    If an error occurs or invalid input is provided, the function recursively
+    calls itself to prompt the user again.
+
+    Returns:
+        dict[str, any]: A dictionary containing the analysis results from
+            analyse.analyse_file().
+    """
     print(f"\n{BOLD}--- File Selection ---\nAvailable text files:{RESET}")
     try:
         for index, x in enumerate(os.listdir(PATH)):
