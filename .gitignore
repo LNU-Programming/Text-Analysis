@@ -209,3 +209,5 @@ __marimo__/
 # Zed Editor
 .zed
 pyrightconfig.json
+
+AGENTS.md
